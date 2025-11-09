@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rudy Ruang Study</title>
-  <link rel="stylesheet" href="../css/style2.css">
+  <link rel="stylesheet" href="../../../public/assets/css/style2.css">
 </head>
 
 <body>
 <header class="navbar">
   <div class="logo">
-    <img src="Logo 1.png" alt="Rudy" height="40">
+    <img src="../../../public/assets/image/Logo 1.png" alt="Rudy" height="40">
   </div>
   <nav>
     <a href="home.html">Beranda</a>
@@ -18,7 +18,7 @@
     <a href="riwayat.html">Riwayat</a>
   </nav>
   <div class="profile">
-    <img src="Logo 1.png" alt="user" class="user-icon">
+    <img src="../../../public/assets/image/Logo 1.png" alt="user" class="user-icon">
   </div>
 </header>
 

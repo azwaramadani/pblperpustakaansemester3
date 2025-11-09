@@ -53,7 +53,7 @@ if (isset($_POST["submit"])) {
         </form>
 
         <p class="register-text">
-            Belum Punya Akun? <a href="signup.php">Daftar</a>
+            Belum Punya Akun? <a href="register_user.php">Daftar</a>
         </p>
 
         <p class="register-text">Atau</p>
