@@ -34,7 +34,7 @@ if (isset($_POST["submit"])) {
 
     <!-- CARD LOGO -->
     <div class="card logo-box">
-        <img src="../../../public/assets/image/Logo 1.png" alt="Rudy Logo">
+        <img src="../../../public/assets/image/LogoRUDY.png" alt="Rudy Logo">
     </div>
 
     <!-- CARD FORM -->
@@ -58,8 +58,9 @@ if (isset($_POST["submit"])) {
 
         <p class="register-text">Atau</p>
 
+        <a href="../guest/home.php">
         <button class="btn-Tamu">Masuk Sebagai Tamu</button>
-
+        </a>
     </div>
 
 </div>

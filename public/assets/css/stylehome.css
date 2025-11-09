@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
+html {
+  scroll-behavior: smooth;
+}
 :root {
   --teal-dark: #0b8e8a;
   --teal: #19b4af;
@@ -230,7 +233,7 @@ main {
   background: var(--yellow);
   border-radius: 999px;
   opacity: 0.85;
-}
+} 
 
 .fitur-item img {
   width: 48px;

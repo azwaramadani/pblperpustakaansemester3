@@ -20,10 +20,9 @@
   </nav>
   <div class="profile">
     <div class="user-name">
-      <p>Hanif</p>
-      <span>Mahasiswa</span>
+      <p>Guest</p>
+      <span>Mahasiswa/Dosen</span>
     </div>
-    <img src="../../../public/assets/image/Logo 1.png" alt="user" class="user-icon">
   </div>
 </header>
 
@@ -38,7 +37,7 @@
       </p>
       <div class="btn-group">
         <a href="app/views/guest/ruangan.php" class="btn primary">Lihat daftar Ruangan</a>
-        <a href="#" class="btn secondary">Lihat Cara Booking</a>
+        <a href="#" id="lihat-cara-booking"class="btn secondary">Lihat Cara Booking</a>
       </div>
     </div>
     <div class="hero-visual">
@@ -85,7 +84,7 @@
           <h3>Lentera Edukasi</h3>
           <p>Kapasitas : 6 - 12 orang</p>
           <p>Status : <span class="status">Tersedia</span></p>
-          <button class="btn primary block">Booking sekarang</button>
+          <button class="btn primary block" href="ruangan.php">Booking sekarang</button>
         </div>
       </article>
 
@@ -111,7 +110,7 @@
     </div>
   </section>
 
-  <section class="steps">
+  <section id="cara-booking" class="steps">
     <h2>Cara Menggunakan Rudy</h2>
     <ol>
       <li>Login ke akunmu.</li>
@@ -122,6 +121,14 @@
       <li>Ruangan siap dipakai.</li>
     </ol>
   </section>
+  <script>
+        document.querySelector('#lihat-cara-booking').addEventListener('click', function(e){
+        e.preventDefault();
+        document.querySelector('#cara-booking').scrollIntoView({
+            behavior: 'smooth'
+        });
+        });
+       </script>
 </main>
 
 <footer class="footer">
@@ -134,15 +141,31 @@
       <h4>Navigasi</h4>
       <a href="#">Beranda</a>
       <a href="#">Ruangan</a>
-      <a href="#">Panduan</a>
+      <a id="navigasipanduan" href="#">Panduan</a>
+      <script>
+        document.querySelector('#navigasipanduan').addEventListener('click', function(e){
+        e.preventDefault();
+        document.querySelector('#cara-booking').scrollIntoView({
+            behavior: 'smooth'
+        });
+        });
+       </script>
       <a href="#">Masuk</a>
     </div>
     <div>
-      <h4>Bantuan</h4>
+      <h4>Bantuan</h4>  
       <a href="#">FAQ</a>
-      <a href="#">Panduan</a>
+      <a id="bantuanpanduan" href="#">Panduan</a>
       <a href="#">Alur</a>
       <a href="#">Akun</a>
+      <script>
+        document.querySelector('#bantuanpanduan').addEventListener('click', function(e){
+        e.preventDefault();
+        document.querySelector('#cara-booking').scrollIntoView({
+            behavior: 'smooth'
+        });
+        });
+       </script>
     </div>
     <div>
       <h4>Kontak</h4>
