@@ -13,10 +13,11 @@
     <img src="../../../public/assets/image/LogoPNJ.png" alt="Logo PNJ" height="40">
     <img src="../../../public/assets/image/LogoRudy.png" alt="Logo Rudy" height="40">
   </div>
-  <nav class="nav-menuguest">
+  <nav class="nav-menuguest ">
+    
     <a href="home.php" class="active">Beranda</a>
-    <a href="ruangan.php" class="active">Ruangan</a>
-    <a href="riwayat.php" class="active">Riwayat</a>
+    <a href="ruangan.php" >Ruangan</a>
+    <a href="riwayat.php" >Riwayat</a>
   </nav>
   <div class="profile">
     <div class="user-name">

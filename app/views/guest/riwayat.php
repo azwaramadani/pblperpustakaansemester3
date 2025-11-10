@@ -60,9 +60,11 @@ $riwayat = [
     </div>
 
     <nav class="nav-links">
+        <div class="left-section">
         <a href="home.php">Beranda</a>
         <a href="ruangan.php">Ruangan</a>
         <a href="riwayat.php" class="active">Riwayat</a>
+</div>
     </nav>
         <div class="profile"> 
         <div class="user-name"> 
