@@ -14,7 +14,6 @@
     <img src="../../../public/assets/image/LogoRudy.png" alt="Logo Rudy" height="40">
   </div>
   <nav class="nav-menuguest ">
-    
     <a href="home.php" class="active">Beranda</a>
     <a href="ruangan.php" >Ruangan</a>
     <a href="riwayat.php" >Riwayat</a>

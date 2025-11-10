@@ -73,7 +73,7 @@ img {
 }
 
 .nav-menu a.active {
-  color: var(--teal-dark);
+  color: #007777;
   position: relative;
 }
 
@@ -84,7 +84,7 @@ img {
   bottom: -6px;
   width: 100%;
   height: 3px;
-  background: var(--teal-dark);
+  background: #007777;
   border-radius: 999px;
 }
 
