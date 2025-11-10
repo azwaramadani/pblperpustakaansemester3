@@ -47,19 +47,23 @@ $riwayat = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riwayat Peminjaman Saya</title>
+    <title>Riwayat Peminjaman Ruangan</title>
     <link rel="stylesheet" href="../../../public/assets/css/styleriwayat.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<header>
-    <div class="navbar">
-        <div class="logo">RUDY <span>Ruang Study</span></div>
-        <nav>
-            <a href="home.php">Beranda</a>
-            <a href="ruangan.php">Ruangan</a>
-            <a href="riwayat.php" class="active">Riwayat</a>
-        </nav>
+<header class="navbar">
+    <div class="left-section">
+        <img src="../../../public/assets/image/LogoPNJ.png" alt="Logo PNJ" class="logo-pnj">
+        <img src="../../../public/assets/image/LogoRudy.png" alt="Logo Rudy" class="logo-rudy">
+    </div>
+
+    <nav class="nav-links">
+        <a href="home.php">Beranda</a>
+        <a href="ruangan.php">Ruangan</a>
+        <a href="riwayat.php" class="active">Riwayat</a>
+    </nav>
         <div class="profile"> 
         <div class="user-name"> 
             <p>Guest</p> 
@@ -67,35 +71,38 @@ $riwayat = [
     </div>
     </div>
 </header>
-
 <h2 class="title">Riwayat Peminjaman Saya</h2>
 
+<!-- ===== Konten Riwayat ===== -->
 <div class="container">
     <?php foreach ($riwayat as $r): ?>
         <div class="card">
             <div class="info">
                 <h3><?= htmlspecialchars($r['nama_ruangan']) ?></h3>
                 <p><strong>Kode Booking:</strong> <?= htmlspecialchars($r['kode_booking']) ?></p>
-                <p><strong>Waktu peminjaman:</strong> <?= htmlspecialchars($r['tanggal']) ?></p>
-                <p><strong>Jam peminjaman:</strong> <?= htmlspecialchars($r['jam']) ?></p>
-                <p><strong>Nama penanggung jawab:</strong> <?= htmlspecialchars($r['penanggung']) ?></p>
-                <p><strong>NIM penanggung jawab:</strong> <?= htmlspecialchars($r['nim']) ?></p>
-                <p><strong>Email penanggung jawab:</strong> <?= htmlspecialchars($r['email']) ?></p>
-                <p><strong>NIM peminjam ruangan:</strong> <?= htmlspecialchars($r['nim_ruangan']) ?></p>
-                <p><strong>Status:</strong> <?= htmlspecialchars($r['status']) ?></p>
+                <p><strong>Tanggal:</strong> <?= htmlspecialchars($r['tanggal']) ?></p>
+                <p><strong>Jam:</strong> <?= htmlspecialchars($r['jam']) ?></p>
+                <p><strong>Penanggung Jawab:</strong> <?= htmlspecialchars($r['penanggung']) ?></p>
+                <p><strong>NIM:</strong> <?= htmlspecialchars($r['nim']) ?></p>
+                <p><strong>Email:</strong> <?= htmlspecialchars($r['email']) ?></p>
+                <p><strong>Anggota Ruangan:</strong> <?= htmlspecialchars($r['nim_ruangan']) ?></p>
+                <p><strong>Status:</strong> 
+                    <span class="status <?= strtolower($r['status']) ?>">
+                        <?= htmlspecialchars($r['status']) ?>
+                    </span>
+                </p>
             </div>
+
             <div class="gambar">
-                <img src="../../../public/assets/image/contohruangan.png" alt="Ruangan">
+            <img src="../../../public/assets/image/contohruangan.png" alt="Lentera Edukasi">
                 <div class="btn-group">
                     <?php if ($r['status'] == 'Menunggu'): ?>
                         <a href="#" class="btn ubah">Ubah</a>
                         <a href="#" class="btn batal">Batalkan</a>
-
                     <?php elseif ($r['status'] == 'Selesai' && !$r['sudah_feedback']): ?>
-                        <a href="feedback.php?kode=<?= urlencode($r['kode_booking']) ?>" class="btn feedback">Beri feedback</a>
-
+                        <a href="feedback.php?kode=<?= urlencode($r['kode_booking']) ?>" class="btn feedback">Beri Feedback</a>
                     <?php elseif ($r['status'] == 'Selesai' && $r['sudah_feedback']): ?>
-                        <a href="feedback.php?kode=<?= urlencode($r['kode_booking']) ?>&lihat=true" class="btn feedback">Lihat feedback Saya</a>
+                        <a href="feedback.php?kode=<?= urlencode($r['kode_booking']) ?>&lihat=true" class="btn feedback">Lihat Feedback Saya</a>
                     <?php endif; ?>
                 </div>
             </div>
@@ -103,28 +110,29 @@ $riwayat = [
     <?php endforeach; ?>
 </div>
 
-<footer>
-    <div class="footer">
-        <div class="brand">
-            <strong>RUDY Ruang Study</strong><br>
-            Platform peminjaman ruangan kampus yang efisien dan mudah digunakan.
-        </div>
-        <div class="col">
+<footer class="footer">
+    <div class="footer-brand">
+        <img src="../../../public/assets/image/LogoRudy.png" alt="Logo Rudy">
+        <p>Rudy Ruang Study - platform peminjaman ruangan study yang praktis, transparan, dan terintegrasi.</p>
+    </div>
+
+    <div class="footer-nav">
+        <div>
             <h4>Navigasi</h4>
             <a href="#">Beranda</a>
             <a href="#">Daftar Ruangan</a>
             <a href="#">Panduan</a>
             <a href="#">Masuk</a>
         </div>
-        <div class="col">
+        <div>
             <h4>Bantuan</h4>
             <a href="#">FAQ</a>
             <a href="#">Aturan Ruangan</a>
         </div>
-        <div class="col">
+        <div>
             <h4>Kontak</h4>
             <p>PerpusPNJ@gmail.com</p>
-            <p>082232456780</p>
+            <p>0822-3245-6780</p>
             <p>Kampus PNJ, Depok</p>
         </div>
     </div>
