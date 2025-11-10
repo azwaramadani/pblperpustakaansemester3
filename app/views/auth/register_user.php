@@ -27,7 +27,7 @@ if (isset($_POST["submit"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar - RUDY Ruang Study</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../../public/assets/css/style.css">
 </head>
 <body>
 
@@ -35,7 +35,7 @@ if (isset($_POST["submit"])) {
 
     <!-- CARD LOGO -->
     <div class="card logo-box">
-        <img src="Logo 1.png" alt="Rudy Logo">
+        <img src="../../../public/assets/image/LogoRudy.png" alt="Logo Rudy">
     </div>
 
     <!-- CARD FORM -->

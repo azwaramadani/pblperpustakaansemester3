@@ -20,7 +20,7 @@
   </nav>
   <div class="profile">
     <div class="user-name">
-      <p>Hanif</p>
+      <p>User</p>
       <span>Mahasiswa</span>
     </div>
     <img src="../../../public/assets/image/Logo 1.png" alt="user" class="user-icon">
@@ -42,7 +42,7 @@
       </div>
     </div>
     <div class="hero-visual">
-      <img src="../../../public/assets/image/LogoRudy.png" alt="Ruangan belajar">
+      <img src="../../../public/assets/image/LogoRudy.png" alt="Logo Rudy">
     </div>
   </section>
 
@@ -85,7 +85,7 @@
           <h3>Lentera Edukasi</h3>
           <p>Kapasitas : 6 - 12 orang</p>
           <p>Status : <span class="status">Tersedia</span></p>
-          <button class="btn primary block" href="ruangan.php">Booking sekarang</button>
+          <button type="button" class="btn primary block booking-trigger">Booking sekarang</button>
         </div>
       </article>
 
@@ -95,7 +95,7 @@
           <h3>Galeri Literasi</h3>
           <p>Kapasitas : 6 - 12 orang</p>
           <p>Status : <span class="status">Tersedia</span></p>
-          <button class="btn primary block">Booking sekarang</button>
+          <button type="button" class="btn primary block booking-trigger">Booking sekarang</button>
         </div>
       </article>
 
@@ -105,11 +105,21 @@
           <h3>Sudut Pustaka</h3>
           <p>Kapasitas : 6 - 12 orang</p>
           <p>Status : <span class="status">Tersedia</span></p>
-          <button class="btn primary block">Booking sekarang</button>
+          <button type="button" class="btn primary block booking-trigger">Booking sekarang</button>
         </div>
       </article>
     </div>
   </section>
+
+<div class="modal" id="login-modal" aria-hidden="true">
+  <div class="modal-backdrop"></div>
+  <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="login-modal-title">
+    <button class="modal-close" type="button" aria-label="Tutup pop-up">&times;</button>
+    <h3 id="login-modal-title">Login untuk membooking ruangan non-rapat ini</h3>
+    <p>Masuk terlebih dahulu agar kamu bisa melanjutkan proses booking ruangan favoritmu.</p>
+    <a href="../auth/login_user.php" class="btn primary modal-login">Masuk sekarang</a>
+  </div>
+</div>
 
   <section id="cara-booking" class="steps">
     <h2>Cara Menggunakan Rudy</h2>
@@ -122,14 +132,6 @@
       <li>Ruangan siap dipakai.</li>
     </ol>
   </section>
-  <script>
-        document.querySelector('#lihat-cara-booking').addEventListener('click', function(e){
-        e.preventDefault();
-        document.querySelector('#cara-booking').scrollIntoView({
-            behavior: 'smooth'
-        });
-        });
-       </script>
 </main>
 
 <footer class="footer">
@@ -143,30 +145,14 @@
       <a href="#">Beranda</a>
       <a href="#">Ruangan</a>
       <a id="navigasipanduan" href="#">Panduan</a>
-      <script>
-        document.querySelector('#navigasipanduan').addEventListener('click', function(e){
-        e.preventDefault();
-        document.querySelector('#cara-booking').scrollIntoView({
-            behavior: 'smooth'
-        });
-        });
-       </script>
       <a href="#">Masuk</a>
     </div>
     <div>
-      <h4>Bantuan</h4>
+      <h4>Bantuan</h4>  
       <a href="#">FAQ</a>
       <a id="bantuanpanduan" href="#">Panduan</a>
       <a href="#">Alur</a>
       <a href="#">Akun</a>
-      <script>
-        document.querySelector('#bantuanpanduan').addEventListener('click', function(e){
-        e.preventDefault();
-        document.querySelector('#cara-booking').scrollIntoView({
-            behavior: 'smooth'
-        });
-        });
-       </script>
     </div>
     <div>
       <h4>Kontak</h4>
@@ -176,6 +162,55 @@
     </div>
   </div>
 </footer>
+
+<script>
+  document.querySelector('#lihat-cara-booking').addEventListener('click', function(e){
+        e.preventDefault();
+        document.querySelector('#cara-booking').scrollIntoView({
+            behavior: 'smooth'
+        });
+        });
+
+  (function () {
+    const modal = document.getElementById('login-modal');
+    if (!modal) return;
+    const openModal = () => {
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden', 'false');
+    };
+    const closeModal = () => {
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden', 'true');
+    };
+    document.querySelectorAll('.booking-trigger').forEach(btn => {
+      btn.addEventListener('click', event => {
+        event.preventDefault();
+        openModal();
+      });
+    });
+    modal.addEventListener('click', event => {
+      if (
+        event.target.classList.contains('modal') ||
+        event.target.classList.contains('modal-backdrop') ||
+        event.target.classList.contains('modal-close')
+      ) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && modal.classList.contains('show')) {
+        closeModal();
+      }
+    });
+  })();
+  document.querySelector('#bantuanpanduan').addEventListener('click', function(e){
+        e.preventDefault();
+        document.querySelector('#cara-booking').scrollIntoView({
+            behavior: 'smooth'
+        });
+        });
+</script>
 
 </body>
 </html>
