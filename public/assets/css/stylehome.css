@@ -124,6 +124,7 @@ main {
   align-items: center;
   justify-content: space-between;
   gap: 40px;  
+  margin-top: -64px;
 }
 
 .hero-text {
@@ -160,7 +161,7 @@ main {
 
 .hero-visual img {
   width: 100%;
-  max-width: 430px;
+  max-width: 400px;
   margin-left: auto;
 }
 
@@ -211,10 +212,11 @@ main {
 
 
 .fitur {
-  margin: 80px auto 60px;
   border-radius: 24px;
-  padding: 48px 80px;
+  padding: 40px 30px;
   color: #2c2c2c;
+  margin-top: -32px;
+  margin-bottom: 64px;
 }
 
 .fitur-row {
@@ -235,7 +237,7 @@ main {
   left: 0;
   top: 0%; 
   width: 4px;
-  height: 120%;
+  height: 100%;
   background: var(--yellow);
   border-radius: 999px;
   opacity: 0.85;

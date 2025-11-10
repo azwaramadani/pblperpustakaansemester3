@@ -15,8 +15,8 @@
   </div>
   <nav class="nav-menuguest">
     <a href="home.php" class="active">Beranda</a>
-    <a href="ruangan.php">Ruangan</a>
-    <a href="riwayat.php">Riwayat</a>
+    <a href="ruangan.php" class="active">Ruangan</a>
+    <a href="riwayat.php" class="active">Riwayat</a>
   </nav>
   <div class="profile">
     <div class="user-name">
