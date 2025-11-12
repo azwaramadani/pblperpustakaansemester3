@@ -82,6 +82,14 @@ body {
   align-items: center;
   gap: 12px;
 }
+
+.profile img {
+    width: 40px;       
+    height: 40px;
+    object-fit: cover; 
+    border-radius: 50%; 
+}
+
 .profile .user-name p {
   margin: 0;
   font-weight: 600;

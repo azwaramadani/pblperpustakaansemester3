@@ -1,46 +1,41 @@
 <?php
-// Data dummy — ganti dengan query database nanti
-$riwayat = [
-    [
-        'nama_ruangan' => 'Lentera Edukasi',
-        'kode_booking' => 'MLBK4G',
-        'tanggal' => 'Selasa, 11 November 2025',
-        'jam' => '09.00 - 11.00',
-        'penanggung' => 'Muhammad Hanif Zidan',
-        'nim' => '2407411050',
-        'email' => 'muhammad.hanif.zidan.tik24@pnj.ac.id',
-        'nim_ruangan' => '2407411051, 2407411052, 2407411053',
-        'status' => 'Menunggu',
-        'sudah_feedback' => false,
-        'gambar' => '../../../public/assets/image/contohruangan.png'
-    ],
-    [
-        'nama_ruangan' => 'Lentera Edukasi',
-        'kode_booking' => 'YNTKTS',
-        'tanggal' => 'Senin, 3 November 2025',
-        'jam' => '09.00 - 11.00',
-        'penanggung' => 'Muhammad Hanif Zidan',
-        'nim' => '2407411050',
-        'email' => 'muhammad.hanif.zidan.tik24@pnj.ac.id',
-        'nim_ruangan' => '2407411051, 2407411052, 2407411053',
-        'status' => 'Selesai',
-        'sudah_feedback' => false,
-        'gambar' => '../../../public/assets/image/contohruangan.png'
-    ],
-    [
-        'nama_ruangan' => 'Lentera Edukasi',
-        'kode_booking' => 'TDR3000',
-        'tanggal' => 'Senin, 27 Oktober 2025',
-        'jam' => '09.00 - 11.00',
-        'penanggung' => 'Muhammad Hanif Zidan',
-        'nim' => '2407411050',
-        'email' => 'muhammad.hanif.zidan.tik24@pnj.ac.id',
-        'nim_ruangan' => '2407411051, 2407411052, 2407411053',
-        'status' => 'Selesai',
-        'sudah_feedback' => true,
-        'gambar' => '../../../public/assets/image/contohruangan.png'
-    ]
-];
+session_start();
+$_SESSION['user_id'] = 1;
+require_once '../../../config/database.php'; 
+// Ambil data user yang sedang login
+$user_id = $_SESSION['user_id'];
+$query_user = "SELECT nama, email FROM user WHERE user_id = '$user_id'";
+$result_user = mysqli_query($connection, $query_user);
+$user_data = mysqli_fetch_assoc($result_user);
+
+// Misal ambil berdasarkan user login (contoh: $_SESSION['user_id'])
+$user_id = 1; // nanti ganti ini sesuai session login
+
+$sql = "
+    SELECT 
+        rm.nama_ruangan,
+        b.kode_booking,
+        DATE_FORMAT(b.tanggal, '%W, %e %M %Y') AS tanggal,
+        CONCAT(DATE_FORMAT(b.jam_mulai, '%H:%i'), ' - ', DATE_FORMAT(b.jam_selesai, '%H:%i')) AS jam,
+        b.nama_penanggung_jawab AS penanggung,
+        b.nimnip_penanggung_jawab AS nim,
+        b.email_penanggung_jawab AS email,
+        b.nimnip_peminjam AS nim_ruangan,
+        b.status_booking AS status,
+        rm.gambar_ruangan AS gambar
+    FROM booking b
+    JOIN room rm ON b.room_id = rm.room_id
+    JOIN user r ON b.user_id = r.user_id
+    WHERE b.user_id = '$user_id'
+    ORDER BY b.tanggal DESC
+";
+
+$result = mysqli_query($connection, $sql);
+$riwayat = [];
+
+while ($row = mysqli_fetch_assoc($result)) {
+    $riwayat[] = $row;
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -67,10 +62,9 @@ $riwayat = [
     </nav>
 
     <div class="profile">
-        <img src="../../../public/assets/img/profile.png" alt="User">
+        <img src="../../../public/assets/image/userlogo.png" alt="User">
         <div class="user-name">
-            <p>Hanif</p>
-            <span>Mahasiswa</span>
+            <p><?= htmlspecialchars($user_data['nama']) ?></p>
         </div>
     </div>
 </header>
