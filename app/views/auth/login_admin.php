@@ -26,14 +26,16 @@ if (isset($_POST["submit"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Masuk - RUDY Ruang Study</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../../public/assets/css/styleregister.css">
 </head>
 <body>
 
-<div class="container">
-    <div class="logo-box">
-        <img src="Logo 1.png" alt="Rudy Logo">
-    </div>
+<div class="auth-wrapper">
+    <section class="auth-card image-panel">
+        <div class="image-overlay">
+            <img src="../../../public/assets/image/LogoRudy.png" alt="Logo Rudy" class="panel-logo">
+        </div>
+    </section>
 
     <div class="right-section">
         <h2>Masuk Sebagai Admin</h2>

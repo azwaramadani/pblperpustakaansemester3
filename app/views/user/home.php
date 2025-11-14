@@ -144,7 +144,8 @@ $user_data = mysqli_fetch_assoc($result_user);
 <footer class="footer">
   <div class="footer-brand">
     <img src="../../../public/assets/image/LogoRudy.png" alt="Rudy">
-    <p>Rudy Ruang Study - platform peminjaman ruangan study yang praktis, transparan, dan terintegrasi.</p>
+    <p>Rudi Ruangan Studi adalah platform peminjaman ruangan perpustakaan yang membantu mahasiswa dan staf mengatur penggunaan ruang belajar
+dengan mudah dan efisien.</p>
   </div>
   <div class="footer-nav">
     <div>
