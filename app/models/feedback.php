@@ -20,7 +20,7 @@ class Feedback extends Model
         return $this->query($sql, [$room_id])->fetchAll();
     }
 
-    # Tambah feedback
+    # Tambah/bikin feedback
     public function create($data)
     {
         $sql = "INSERT INTO {$this->table} (booking_id, room_id, user_id, puas, komentar, tanggal_feedback)
