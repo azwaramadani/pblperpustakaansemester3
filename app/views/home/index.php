@@ -44,7 +44,7 @@
         praktis, dan siap digunakan kapan pun.
       </p>
       <div class="btn-group">
-        <a href="?route=Guest/ruangan" class="btn primary">Lihat daftar Ruangan</a>
+        <a href="?route=Auth/login" class="btn primary">Lihat daftar Ruangan</a>
         <a href="#" id="lihat-cara-booking" class="btn secondary">Lihat Cara Booking</a>
       </div>
     </div>
@@ -53,7 +53,6 @@
       <img src="<?= app_config()['base_url'] ?>/assets/image/LogoRudy.png" alt="Logo Rudy">
     </div>
   </section>
-
 
   <!-- FITUR SECTION -->
   <section class="fitur">
@@ -109,18 +108,15 @@
     </div>
   </section>
 
-
-  <!-- MODAL LOGIN -->
-  <div class="modal" id="login-modal" aria-hidden="true">
-    <div class="modal-backdrop"></div>
-    <div class="modal-dialog">
-      <button class="modal-close" type="button">&times;</button>
-      <h3>Login untuk membooking ruangan</h3>
-      <p>Masuk terlebih dahulu agar kamu bisa melanjutkan proses booking.</p>
-      <a href="?route=Auth/login" class="btn primary modal-login">Masuk sekarang</a>
-    </div>
-  </div>
-
+        <div class="modal" id="login-modal" aria-hidden="true">
+          <div class="modal-backdrop"></div>
+          <div class="modal-dialog">
+            <button class="modal-close" type="button">&times;</button>
+            <h3>Login untuk membooking & melihat ruangan</h3>
+            <p>Masuk terlebih dahulu agar kamu bisa booking & lihat daftar ruangan.</p>
+            <a href="?route=Auth/login" class="btn primary modal-login">Masuk sekarang</a>
+          </div>
+        </div>
 
   <!-- CARA BOOKING -->
   <section id="cara-booking" class="steps">
