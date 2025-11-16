@@ -1,7 +1,7 @@
 :root {
     --teal-dark: #0b8e8a;
     --teal: #19b4af;
-    --yellow: #ffd633;
+    --yellow: #f9d134;
     --text-dark: #1f2a37;
     --text-muted: #6b7280;
     --card-shadow: 0 20px 40px rgba(15, 36, 57, 0.12);
@@ -301,6 +301,7 @@ body.auth-body {
     width: 100%;
     padding: 12px;
     background: var(--yellow);
+    box-shadow: 0 15px 25px rgba(255, 185, 49, 0.35);
     border: none;
     border-radius: 12px;
     font-weight: 600;
@@ -310,7 +311,7 @@ body.auth-body {
 }
 
 .btn-login:hover {
-    background: #ffc400;
+    background: #ffd84f;
 }
 
 .btn-login:active {
@@ -328,15 +329,17 @@ body.auth-body {
 
 .btn-guest {
     display: inline-flex;
-    justify-content: center;
-    width: 100%;
-    padding: 12px;
-    border-radius: 12px;
-    background: var(--teal);
-    color: #ffffff;
-    font-weight: 600;
     text-decoration: none;
+    justify-content: center;
+    width: 94%;
+    padding: 12px;
+    background: var(--teal);
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
     transition: background 0.2s ease, transform 0.2s ease;
+    font-size: 15px;
 }
 
 .btn-guest:hover {

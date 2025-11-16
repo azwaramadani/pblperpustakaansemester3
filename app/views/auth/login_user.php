@@ -52,12 +52,9 @@ if (isset($_POST["submit"])) {
         </form>
 
         <p class="register-text">
-            Belum Punya Akun? <a href="register_user.php">Daftar</a>
+            Belum Punya Akun?
         </p>
-        <div class="divider">
-            <span>Atau</span>
-        </div>
-        <a href="../guest/home.php" class="btn-guest">Masuk sebagai Tamu</a>
+        <a href="../guest/home.php" class="btn-guest">Daftar</a>
     </section>
 </div>
 

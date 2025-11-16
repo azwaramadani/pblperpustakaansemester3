@@ -112,7 +112,9 @@ $user_data = mysqli_fetch_assoc($result_user);
           <h3>Sudut Pustaka</h3>
           <p>Kapasitas : 6 - 12 orang</p>
           <p>Status : <span class="status">Tersedia</span></p>
-          <button type="button" class="btn primary block booking-trigger">Booking sekarang</button>
+          <a href="booking_step1.php">
+            <button type="button" class="btn primary block booking-trigger">Booking sekarang</button>
+          </a>
         </div>
       </article>
     </div>
@@ -170,55 +172,5 @@ dengan mudah dan efisien.</p>
     </div>
   </div>
 </footer>
-
-<script>
-  document.querySelector('#lihat-cara-booking').addEventListener('click', function(e){
-        e.preventDefault();
-        document.querySelector('#cara-booking').scrollIntoView({
-            behavior: 'smooth'
-        });
-        });
-
-  (function () {
-    const modal = document.getElementById('login-modal');
-    if (!modal) return;
-    const openModal = () => {
-      modal.classList.add('show');
-      modal.setAttribute('aria-hidden', 'false');
-    };
-    const closeModal = () => {
-      modal.classList.remove('show');
-      modal.setAttribute('aria-hidden', 'true');
-    };
-    document.querySelectorAll('.booking-trigger').forEach(btn => {
-      btn.addEventListener('click', event => {
-        event.preventDefault();
-        openModal();
-      });
-    });
-    modal.addEventListener('click', event => {
-      if (
-        event.target.classList.contains('modal') ||
-        event.target.classList.contains('modal-backdrop') ||
-        event.target.classList.contains('modal-close')
-      ) {
-        closeModal();
-      }
-    });
-
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && modal.classList.contains('show')) {
-        closeModal();
-      }
-    });
-  })();
-  document.querySelector('#bantuanpanduan').addEventListener('click', function(e){
-        e.preventDefault();
-        document.querySelector('#cara-booking').scrollIntoView({
-            behavior: 'smooth'
-        });
-        });
-</script>
-
 </body>
 </html>

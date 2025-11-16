@@ -18,9 +18,9 @@
     <a href="ruangan.php">Ruangan</a>
     <a href="riwayat.php">Riwayat</a>
   </nav>
-  <div class="profile">
-    <div class="user-name">
-      <p>Guest</p>
+  <div class="guest-login-button">
+    <div class="btn-group">
+      <a href="../app/views/auth/login_user.php" class="btn primary">Login</a>
     </div>
   </div>
 </header>
