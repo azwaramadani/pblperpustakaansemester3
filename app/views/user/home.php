@@ -102,5 +102,14 @@
   </div>
 </footer>
 
+<script>
+  document.querySelector('#lihat-cara-booking').addEventListener('click', function(e){
+      e.preventDefault();
+      document.querySelector('#cara-booking').scrollIntoView({
+          behavior: 'smooth'
+      });
+  });
+
+  </script>
 </body>
 </html>
