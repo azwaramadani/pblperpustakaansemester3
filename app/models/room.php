@@ -10,7 +10,7 @@ class Room extends Model
     protected $table = 'ruangan';
 
     # Ambil semua ruangan
-    public function getAll()
+    public function getAllRooms()
     {
         $sql = "SELECT * FROM {$this->table} ORDER BY nama_ruangan ASC";
         return $this->query($sql)->fetchAll();

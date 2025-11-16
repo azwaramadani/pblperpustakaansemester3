@@ -28,7 +28,7 @@ $gambar = "../../../public/assets/image/contohruangan.png";
     <!-- Tengah -->
     <nav class="nav-center">
         <ul class="nav-menu">
-            <li><a href="index.php">Beranda</a></li>
+            <li><a href="home.php">Beranda</a></li>
             <li><a href="ruangan.php">Ruangan</a></li>
             <li><a href="riwayat.php">Riwayat</a></li>
         </ul>
@@ -47,7 +47,7 @@ $gambar = "../../../public/assets/image/contohruangan.png";
 
     <!-- CARD RUANGAN -->
     <div class="room-card">
-        <img src="<?= $gambar ?>" class="room-img">
+        <img src="../../../public/assets/image/contohruangan.png" class="room-img">
 
         <div class="room-info">
             <h2><?= $nama_ruangan ?></h2>

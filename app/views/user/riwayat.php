@@ -1,6 +1,6 @@
 <?php
 session_start();
-$_SESSION['user_id'] = 1;
+$_SESSION['user_id'] = 2;
 require_once '../../../config/database.php'; 
 // Ambil data user yang sedang login
 $user_id = $_SESSION['user_id'];

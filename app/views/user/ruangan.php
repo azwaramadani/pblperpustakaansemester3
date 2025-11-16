@@ -3,7 +3,7 @@ session_start();
 require_once '../../../config/database.php';
 
 // Ambil data user untuk profil kanan atas
-$user_id = $_SESSION['user_id'] ?? 1;
+$user_id = $_SESSION['user_id'] ?? 2;
 $query_user = "SELECT nama, email FROM user WHERE user_id = '$user_id'";
 $result_user = mysqli_query($connection, $query_user);
 $user_data = mysqli_fetch_assoc($result_user);
@@ -68,13 +68,13 @@ while ($row = mysqli_fetch_assoc($result_room)) {
         <?php else: ?>
             <?php foreach ($ruangan as $r): ?>
                 <div class="room-card">
-                    <img src="../../../public/assets/image/<?= htmlspecialchars($r['gambar_ruangan']) ?>" alt="<?= htmlspecialchars($r['nama_ruangan']) ?>" class="room-img">
+                    <img src="../../../public/assets/image/contohruangan.png" alt="<?= htmlspecialchars($r['nama_ruangan']) ?>" class="room-img">
                     <div class="room-info">
                         <h3><?= htmlspecialchars($r['nama_ruangan']) ?></h3>
                         <p>Kapasitas: <?= htmlspecialchars($r['kapasitas_min']) ?> - <?= htmlspecialchars($r['kapasitas_max']) ?> orang</p>
                         <p>Status: <span class="status tersedia"><?= htmlspecialchars($r['status']) ?></span></p>
                     </div>
-                    <a href="booking.php?room_id=<?= urlencode($r['room_id']) ?>" class="btn-book">Booking sekarang</a>
+                    <a href="booking_step1.php?room_id=<?= urlencode($r['room_id']) ?>" class="btn-book">Booking sekarang</a>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>

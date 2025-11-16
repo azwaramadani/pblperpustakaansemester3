@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once '../../../config/database.php';
-$user_id = $_SESSION['user_id'] ?? 1;
+$user_id = $_SESSION['user_id'] ?? 2;
 $query_user = "SELECT nama, email FROM user WHERE user_id = '$user_id'";
 $result_user = mysqli_query($connection, $query_user);
 $user_data = mysqli_fetch_assoc($result_user);
@@ -80,55 +80,39 @@ $user_data = mysqli_fetch_assoc($result_user);
   </section>
 
   <section class="ruangan-section">
-    <div class="section-header">
-      <h2>Ruangan Populer di Rudy</h2>
-      <p>Temukan ruang study favorit mahasiswa.</p>
-    </div>
+  <div class="rooms-container">
 
-    <div class="ruangan-list">
-      <article class="card">
-        <img src="../../../public/assets/image/contohruangan.png" alt="Lentera Edukasi">
-          <div class="card-body">
-            <h3>Lentera Edukasi</h3>
-            <p>Kapasitas : 6 - 12 orang</p>
-            <p>Status : <span class="status">Tersedia</span></p>
-            <button type="button" class="btn primary block booking-trigger">Booking sekarang</button>
-          </div>
-      </article>
+    <?php if(!empty($data['rooms'])): ?>
+      <?php foreach($data['rooms'] as $room): ?>
 
-      <article class="card">
-        <img src="../../../public/assets/image/contohruangan.png" alt="Galeri Literasi">
-        <div class="card-body">
-          <h3>Galeri Literasi</h3>
-          <p>Kapasitas : 6 - 12 orang</p>
-          <p>Status : <span class="status">Tersedia</span></p>
-          <button type="button" class="btn primary block booking-trigger">Booking sekarang</button>
-        </div>
-      </article>
+        <article class="card">
+            <img src="../../../public/assets/image/contohruangan.png" 
+                 alt="<?= $room['nama_ruangan']; ?>">
 
-      <article class="card">
-        <img src="../../../public/assets/image/contohruangan.png" alt="Sudut Pustaka">
-        <div class="card-body">
-          <h3>Sudut Pustaka</h3>
-          <p>Kapasitas : 6 - 12 orang</p>
-          <p>Status : <span class="status">Tersedia</span></p>
-          <a href="booking_step1.php">
-            <button type="button" class="btn primary block booking-trigger">Booking sekarang</button>
-          </a>
-        </div>
-      </article>
-    </div>
-  </section>
+            <div class="card-body">
+              <h3><?= $room['nama_ruangan']; ?></h3>
+              <p>Kapasitas: <?= $room['kapasitas_min']; ?> - <?= $room['kapasitas_max']; ?> orang</p>
+              <p>Status: 
+                <span class="status <?= strtolower(str_replace(' ', '_', $room['status'])); ?>">
+                    <?= $room['status']; ?>
+                </span>
+              </p>
 
-<div class="modal" id="login-modal" aria-hidden="true">
-  <div class="modal-backdrop"></div>
-  <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="login-modal-title">
-    <button class="modal-close" type="button" aria-label="Tutup pop-up">&times;</button>
-    <h3 id="login-modal-title">Login untuk membooking ruangan non-rapat ini</h3>
-    <p>Masuk terlebih dahulu agar kamu bisa melanjutkan proses booking ruangan favoritmu.</p>
-    <a href="../auth/login_user.php" class="btn primary modal-login">Masuk sekarang</a>
+              <a href="booking_step1.php?room_id=<?= $room['room_id']; ?>">
+                <button type="button" class="btn primary block booking-trigger">Booking sekarang</button>
+              </a>
+            </div>
+        </article>
+
+      <?php endforeach; ?>
+    <?php else: ?>
+
+      <p>Tidak ada data ruangan tersedia.</p>
+
+    <?php endif; ?>
+
   </div>
-</div>
+</section>
 
   <section id="cara-booking" class="steps">
     <h2>Cara Menggunakan Rudy</h2>
