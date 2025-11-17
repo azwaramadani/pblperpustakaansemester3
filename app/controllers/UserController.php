@@ -5,7 +5,8 @@ class UserController
 {
     public function home()
     {
-        # pastikan user login
+        #ini buat mastiin user harus login dulu sebelum punya hak akses user/home.php, 
+        #jadi, kalo user !session, maka otomatis akan di route-kan ke Auth/login
         if (!Session::get('user_id')) {
             header("Location: ?route=Auth/login");
             exit;

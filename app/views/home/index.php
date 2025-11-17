@@ -18,9 +18,9 @@
   </div>
 
   <nav class="nav-menuguest">
-    <a href="?route=Home/index" class="active">Beranda</a>
-    <a href="?route=Guest/ruangan">Ruangan</a>
-    <a href="?route=Guest/riwayat">Riwayat</a>
+    <a href="?route=home/index" class="active">Beranda</a>
+    <a href="#" class="booking-trigger">Ruangan</a>
+    <a href="#" class="booking-trigger">Riwayat</a>
   </nav>
 
   <div class="guest-login-button">
@@ -44,7 +44,7 @@
         praktis, dan siap digunakan kapan pun.
       </p>
       <div class="btn-group">
-        <a href="?route=Auth/login" class="btn primary">Lihat daftar Ruangan</a>
+        <a href="#" class="btn primary booking-trigger">Lihat daftar Ruangan</a>
         <a href="#" id="lihat-cara-booking" class="btn secondary">Lihat Cara Booking</a>
       </div>
     </div>
@@ -83,7 +83,15 @@
     </div>
   </section>
 
-
+  <div class="modal" id="login-modal" aria-hidden="true">
+    <div class="modal-backdrop"></div>
+      <div class="modal-dialog">
+        <button class="modal-close" type="button">&times;</button>
+        <h3>Login untuk booking & melihat ruangan</h3>
+        <p>Masuk terlebih dahulu agar kamu bisa booking & lihat daftar ruangan.</p>
+        <a href="?route=Auth/login" class="btn primary modal-login">Masuk sekarang</a>
+      </div>
+  </div>
   <!-- RUANG POPULER (hardcoded sementara) -->
   <section class="ruangan-section">
     <div class="section-header">
@@ -107,16 +115,6 @@
 
     </div>
   </section>
-
-        <div class="modal" id="login-modal" aria-hidden="true">
-          <div class="modal-backdrop"></div>
-          <div class="modal-dialog">
-            <button class="modal-close" type="button">&times;</button>
-            <h3>Login untuk membooking & melihat ruangan</h3>
-            <p>Masuk terlebih dahulu agar kamu bisa booking & lihat daftar ruangan.</p>
-            <a href="?route=Auth/login" class="btn primary modal-login">Masuk sekarang</a>
-          </div>
-        </div>
 
   <!-- CARA BOOKING -->
   <section id="cara-booking" class="steps">

@@ -16,7 +16,7 @@ class Router
     public function run()
     {
         # Ambil route dari URL
-        $route = $_GET['route'] ?? 'Home/index';
+        $route = $_GET['route'] ?? 'home/index';
         $route = trim($route, '/');
 
         $parts = explode('/', $route);
