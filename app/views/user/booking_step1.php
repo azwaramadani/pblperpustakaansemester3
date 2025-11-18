@@ -1,5 +1,5 @@
 <?php
-// Dummy data (tidak terhubung ke database)
+
 $nama_ruangan = "Lentera Edukasi";
 $kapasitas = "2 - 4 orang";
 $deskripsi = "Ruangan khusus bimbingan dan konseling dengan suasana tenang 
