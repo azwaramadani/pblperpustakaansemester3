@@ -52,7 +52,11 @@ class UserController
 
     public function riwayat()
     {
+        //pastiin user udah login dan dapet session
+        Session::checkUserLogin();
 
+        //buat konekin supaya user bisa liat file riwayat.php
+        require __DIR__ . '/../views/user/riwayat.php';
 
     }
 }
