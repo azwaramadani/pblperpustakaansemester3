@@ -82,7 +82,7 @@ class AuthController
         //     header("Location: ?route=Admin/dashboard");
         //     exit;
         // }
-
+        
         # =========================================================
         # Redirect user ke halaman home
         # =========================================================

@@ -44,12 +44,12 @@ $ruangan = $data['rooms'];
             <div class="info">
                 <h3><?= htmlspecialchars($r['nama_ruangan']) ?></h3>
                 <p><strong>Kode Booking:</strong> <?= htmlspecialchars($r['kode_booking']) ?></p>
-                <p><strong>Tanggal:</strong> <?= htmlspecialchars($r['tanggal']) ?></p>
-                <p><strong>Jam:</strong> <?= htmlspecialchars($r['jam']) ?></p>
-                <p><strong>Penanggung Jawab:</strong> <?= htmlspecialchars($r['penanggung']) ?></p>
-                <p><strong>NIM:</strong> <?= htmlspecialchars($r['nim']) ?></p>
-                <p><strong>Email:</strong> <?= htmlspecialchars($r['email']) ?></p>
-                <p><strong>Anggota Ruangan:</strong> <?= htmlspecialchars($r['nim_ruangan']) ?></p>
+                <p><strong>Waktu Peminjaman:</strong> <?= htmlspecialchars($r['tanggal']) ?></p>
+                <p><strong>Jam Peminjaman:</strong> <?= htmlspecialchars($r['jam']) ?></p>
+                <p><strong>Nama Penanggung Jawab:</strong> <?= htmlspecialchars($r['penanggung']) ?></p>
+                <p><strong>NIM Penanggung Jawab:</strong> <?= htmlspecialchars($r['nim']) ?></p>
+                <p><strong>Email Penanggung Jawab:</strong> <?= htmlspecialchars($r['email']) ?></p>
+                <p><strong>NIM Peminjam Ruangan:</strong> <?= htmlspecialchars($r['nim_ruangan']) ?></p>
                 <p><strong>Status:</strong> 
                     <span class="status <?= strtolower($r['status']) ?>">
                         <?= htmlspecialchars($r['status']) ?>

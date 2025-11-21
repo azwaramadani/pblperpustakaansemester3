@@ -104,7 +104,7 @@
   <div class="footer-nav">
     <div>
       <h4>Navigasi</h4>
-      <a href="?route=Home/index">Beranda</a>
+      <a href="?route=User/home">Beranda</a>
       <a href="?route=Guest/ruangan">Ruangan</a>
       <a id="navigasipanduan" href="#">Panduan</a>
       <a href="?route=Auth/login">Masuk</a>

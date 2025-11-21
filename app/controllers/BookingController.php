@@ -3,6 +3,37 @@
 require_once __DIR__ . '/../../core/Session.php';
 
 Class bookingController{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     public function cancel($bookingId)
         {
             Session::checkUserLogin();
