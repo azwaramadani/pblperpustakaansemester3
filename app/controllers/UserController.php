@@ -1,8 +1,7 @@
 <?php
 require_once __DIR__ . '/../../core/Session.php';
 
-class UserController
-{
+class UserController {
     public function home()
     {
         #ini buat mastiin user harus login dulu sebelum punya hak akses user/home.php, 
@@ -77,6 +76,7 @@ class UserController
                 : rtrim(app_config()['base_url'], '/') . '/' . ltrim($gambar, '/');
 
             return [
+                'booking_id'    => $row['booking_id'],
                 'nama_ruangan'  => $row['nama_ruangan'] ?? '-',
                 'kode_booking'  => $row['kode_booking'] ?? '-',
                 'tanggal'       => $tanggal,

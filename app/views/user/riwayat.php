@@ -58,11 +58,11 @@ $ruangan = $data['rooms'];
             </div>
 
             <div class="gambar">
-                <img src="<?= htmlspecialchars($r['gambar']) ?>" alt="Ruangan">
+                <img src="<?= app_config()['base_url'] ?>/public/assets/image/contohruangan.png" alt="Ruangan">
                 <div class="btn-group">
-                    <?php if ($r['status'] == 'Menunggu'): ?>
-                        <a href="#" class="btn ubah">Ubah</a>
-                        <a href="#" class="btn batal">Batalkan</a>
+                    <?php if ($r['status'] == 'Disetujui'): ?>
+                        <a href="?route=Booking/editForm/<?= urlencode($r['booking_id']) ?>" class="btn ubah">Ubah</a>
+                        <a href="?route=Booking/batalbooking/" class="btn batal">Batalkan</a>
                     <?php elseif ($r['status'] == 'Selesai' && !$r['sudah_feedback']): ?>
                         <a href="feedback.php?kode=<?= urlencode($r['kode_booking']) ?>" class="btn feedback">Beri Feedback</a>
                     <?php elseif ($r['status'] == 'Selesai' && $r['sudah_feedback']): ?>

@@ -79,8 +79,9 @@ if (isset($_POST["submit"])) {
 
         </form>
 
-        <p class="register-text">
-            Sudah Punya Akun? <a href="login_user.php">Masuk</a>
+        <p class="register-text" href="<?= app_config()['base_url'] ?>/app/views/auth/login_user.php">
+            Sudah Punya Akun? <a href="<?= app_config()['base_url'] ?>/app/views/auth/login_user.php">Masuk</a>
+
         </p>
     </div>
 

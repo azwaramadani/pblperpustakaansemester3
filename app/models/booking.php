@@ -107,12 +107,15 @@ class Booking extends Model
         return $this->query($sql, [$status, $booking_id]);
     }
 
-    # Hapus booking (misalnya jika dibatalkan)
-    public function delete($booking_id)
+    #kalo booking dibatalin
+    public function cancelByUser($booking_id, $user_id)
     {
-        $sql = "DELETE FROM {$this->table} WHERE booking_id = ?";
-        return $this->query($sql, [$booking_id]);
+        $sql = "UPDATE {$this->table}
+                SET status_booking = 'Dibatalkan'
+                WHERE booking_id = ? AND user_id = ? AND status_booking = 'Menunggu'";
+        return $this->query($sql, [$booking_id, $user_id]);
     }
+
 
     # Hitung pembatalan hari ini (untuk auto-blokir user)
     public function countCancellationsToday($user_id)
