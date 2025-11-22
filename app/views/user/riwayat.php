@@ -24,14 +24,19 @@ $ruangan = $data['rooms'];
     <a href="?route=User/ruangan">Ruangan</a>
     <a href="?route=User/riwayat" class="active">Riwayat</a>
   </nav>
-  <div class="profile">
-        <a href="profile.php">
-            <img src="<?= app_config()['base_url'] ?>/public/assets/image/userlogo.png" alt="User">
-        </a>
-        <div class="user-name">
-            <p><?= htmlspecialchars($user_data['nama']) ?></p>
-        </div>
+  <div class="profile-dropdown">
+    <div class="profile-trigger">
+      <img src="<?= app_config()['base_url'] ?>/public/assets/image/userlogo.png" alt="User">
+      <div class="user-name"><p><?= htmlspecialchars($user_data['nama']) ?></p></div>
     </div>
+    <div class="profile-card">
+      <p><strong><?= htmlspecialchars($user_data['nama']) ?></strong></p>
+      <p><?= htmlspecialchars($user_data['nim_nip']) ?></p>
+      <p><?= htmlspecialchars($user_data['no_hp']) ?></p>
+      <p><?= htmlspecialchars($user_data['email']) ?></p>
+      <a class="btn-logout" href="?route=Auth/logout">Keluar</a>
+    </div>
+  </div>
 </header>
 
 <!-- ===== Judul ===== -->

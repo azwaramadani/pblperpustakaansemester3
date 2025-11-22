@@ -22,17 +22,23 @@
     <a href="?route=User/riwayat">Riwayat</a>
   </nav>
 
-  <div class="profile">
-    <img src="<?= app_config()['base_url'] ?>/public/assets/image/userlogo.png" alt="User">
-    <div class="user-name">
-        <p><?= htmlspecialchars($data['user']['nama']) ?></p>
+    <div class="profile-dropdown">
+      <div class="profile-trigger">
+        <img src="<?= app_config()['base_url'] ?>/public/assets/image/userlogo.png" alt="User">
+        <div class="user-name"><p><?= htmlspecialchars($data['user']['nama']) ?></p></div>
+      </div>
+      <div class="profile-card">
+        <p><strong><?= htmlspecialchars($data['user']['nama']) ?></strong></p>
+        <p><?= htmlspecialchars($data['user']['nim_nip']) ?></p>
+        <p><?= htmlspecialchars($data['user']['no_hp']) ?></p>
+        <p><?= htmlspecialchars($data['user']['email']) ?></p>
+        <a class="btn-logout" href="?route=Auth/logout">Keluar</a>
+      </div>
     </div>
-  </div>
 </header>
 
 
 <main>
-
   <section class="hero">
     <div class="hero-text">
       <p class="intro">Selamat Datang di <span>Rudy</span></p>

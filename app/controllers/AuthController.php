@@ -14,6 +14,15 @@ class AuthController
         require __DIR__ . '/../views/auth/login_user.php';
     }
 
+
+    # BUAT LOGOUT
+    public function logout()
+    {
+        Session::destroy();
+        header("Location: ?route=Auth/login");
+        exit;
+    }
+
     # =========================================================
     # PROSES LOGIN USER
     # URL: ?route=Auth/loginProcess

@@ -27,11 +27,18 @@ $ruangan = $data['rooms'];
     <a href="?route=User/riwayat">Riwayat</a>
   </nav>
 
-  <div class="profile">
+    <div class="profile-dropdown">
+      <div class="profile-trigger">
         <img src="<?= app_config()['base_url'] ?>/public/assets/image/userlogo.png" alt="User">
-        <div class="user-name">
-            <p><?= htmlspecialchars($user['nama']) ?></p>
-        </div>
+        <div class="user-name"><p><?= htmlspecialchars($user['nama']) ?></p></div>
+      </div>
+      <div class="profile-card">
+        <p><strong><?= htmlspecialchars($user['nama']) ?></strong></p>
+        <p><?= htmlspecialchars($user['nim_nip']) ?></p>
+        <p><?= htmlspecialchars($user['no_hp']) ?></p>
+        <p><?= htmlspecialchars($user['email']) ?></p>
+        <a class="btn-logout" href="?route=Auth/logout">Keluar</a>
+      </div>
     </div>
 </header>
 
