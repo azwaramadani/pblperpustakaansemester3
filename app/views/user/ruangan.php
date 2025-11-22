@@ -14,7 +14,6 @@ $ruangan = $data['rooms'];
 </head>
 
 <body>
-
 <header class="navbar">
   <div class="logo">
     <img src="<?= app_config()['base_url'] ?>/public/assets/image/LogoPNJ.png" height="40">

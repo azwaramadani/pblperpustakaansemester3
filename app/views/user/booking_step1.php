@@ -1,9 +1,10 @@
 <?php
-$user  = $data['user'];
-$room  = $data['room'];
-$err   = Session::get('flash_error');
+$user = $data['user'];
+$room = $data['room'];
+$err = Session::get('flash_error');
 Session::set('flash_error', null);
 ?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
