@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,97 +10,99 @@
 </head>
 
 <!-- Menggunakan class auth-body agar layout konsisten -->
+
 <body class="auth-body login-page">
-<div class="auth-wrapper">
+    <div class="auth-wrapper">
 
-    <!-- BAGIAN KIRI: GAMBAR -->
-    <section class="auth-card image-panel">
-        <div class="image-overlay">
-            <img src="<?= app_config()['base_url'] ?>/public/assets/image/libroompnj.png" alt="Logo Rudy" class="panel-logo">
-        </div>
-    </section>
-
-    <!-- BAGIAN KANAN: FORM -->
-    <section class="auth-card form-panel">
-        <!-- Wrapper konten form agar rapi -->
-        <div class="form-content">
-            <div class="form-header">
-                <h2>Masuk</h2>
+        <!-- BAGIAN KIRI: GAMBAR -->
+        <section class="auth-card image-panel">
+            <div class="image-overlay">
+                <img src="<?= app_config()['base_url'] ?>/public/assets/image/libroompnj.png" alt="Logo Rudy" class="panel-logo">
             </div>
-            <!-- Flash Messages -->
-            <?php if (!empty($success = $flash['success'])): ?>
-                <div class="flash success"><?= htmlspecialchars($success) ?></div>
-            <?php endif; ?>
-            <?php if (!empty($error = $flash['error'])): ?>
-                <div class="flash error"><?= htmlspecialchars($error) ?></div>
-            <?php endif; ?>
+        </section>
 
-            <form method="POST" class="login-form" action="?route=Auth/loginProcess">
-                
-                <div class="form-group">
-                    <label for="nim">Username</label>
-                    <input id="nim"
-                           type="text"
-                           name="username"
-                           class="form-control"
-                           placeholder="Masukkan NIM/NIP..."
-                           autocomplete="off"
-                           required>
+        <!-- BAGIAN KANAN: FORM -->
+        <section class="auth-card form-panel">
+            <!-- Wrapper konten form agar rapi -->
+            <div class="form-content">
+                <div class="form-header">
+                    <h2>Masuk</h2>
                 </div>
+                <!-- Flash Messages -->
+                <?php if (!empty($success = $flash['success'])): ?>
+                    <div class="flash success"><?= htmlspecialchars($success) ?></div>
+                <?php endif; ?>
+                <?php if (!empty($error = $flash['error'])): ?>
+                    <div class="flash error"><?= htmlspecialchars($error) ?></div>
+                <?php endif; ?>
 
-                <div class="form-group">
-                    <label for="password">Password</label>
+                <form method="POST" class="login-form" action="?route=Auth/loginProcess">
 
-                    <div class="input-wrapper">
-                        <input id="password"
-                            type="password"
-                            name="password"
+                    <div class="form-group">
+                        <label for="nim">Username</label>
+                        <input id="nim"
+                            type="text"
+                            name="username"
                             class="form-control"
-                            placeholder="Masukkan Password"
-                            autocomplete="new-password"
+                            placeholder="Masukkan NIM/NIP..."
+                            autocomplete="off"
                             required>
-
-                        <button type="button" id="togglePassword" class="toggle-password">
-                            <span id="eyeIcon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="#555" stroke-width="2"/>
-                                <circle cx="12" cy="12" r="3" stroke="#555" stroke-width="2"/>
-                                </svg>
-                            </span>
-                        </button>
                     </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+
+                        <div class="input-wrapper">
+                            <input id="password"
+                                type="password"
+                                name="password"
+                                class="form-control"
+                                placeholder="Masukkan Password"
+                                autocomplete="new-password"
+                                required>
+
+                            <button type="button" id="togglePassword" class="toggle-password">
+                                <span id="eyeIcon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                        <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="#555" stroke-width="2" />
+                                        <circle cx="12" cy="12" r="3" stroke="#555" stroke-width="2" />
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" name="submit" class="btn-login">Masuk</button>
+                </form>
+
+                <!-- Footer (Center & Satu Baris) -->
+                <div class="register-footer">
+                    Belum Punya Akun? <a href="?route=Auth/registerRole" class="btn-guest">Daftar</a>
                 </div>
 
-                <button type="submit" name="submit" class="btn-login">Masuk</button>
-            </form>
-
-            <!-- Footer (Center & Satu Baris) -->
-            <div class="register-footer">
-                Belum Punya Akun? <a href="?route=Auth/registerRole" class="btn-guest">Daftar</a>
+                <div class="register-footer">
+                    <a href="?route=Auth/forgotPassword" class="btn-guest">Lupa Password?</a>
+                </div>
             </div>
-            
-            <div class="register-footer">
-                <a href="?route=Auth/forgotPassword" class="btn-guest">Lupa Password?</a>
-            </div>
-        </div>
-    </section>
-</div>
+        </section>
+    </div>
 
-<script>
-const passwordInput = document.getElementById('password');
-const toggleBtn = document.getElementById('togglePassword');
-const eyeIcon = document.getElementById('eyeIcon');
+    <script>
+        const passwordInput = document.getElementById('password');
+        const toggleBtn = document.getElementById('togglePassword');
+        const eyeIcon = document.getElementById('eyeIcon');
 
-toggleBtn.addEventListener('click', () => {
-    const isPassword = passwordInput.type === 'password';
+        toggleBtn.addEventListener('click', () => {
+            const isPassword = passwordInput.type === 'password';
 
-    passwordInput.type = isPassword ? 'text' : 'password';
+            passwordInput.type = isPassword ? 'text' : 'password';
 
-    eyeIcon.innerHTML = isPassword 
-        ? '🙈'
-        : '👁️';
-});
-</script>
+            eyeIcon.innerHTML = isPassword ?
+                '🙈' :
+                '👁️';
+        });
+    </script>
 
 </body>
+
 </html>

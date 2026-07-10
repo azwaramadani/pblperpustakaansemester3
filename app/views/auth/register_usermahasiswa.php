@@ -78,17 +78,17 @@
                 <span id="file-chosen">Belum ada file dipilih</span>
             </div>
 
-            <!-- CAPTCHA CUSTOM -->
+            <!-- CAPTCHA CUSTOM
             <label>Kode Keamanan</label>
             <div class="custom-captcha-wrapper">
-                <!-- 1. GAMBAR CAPTCHA -->
-                <div class="captcha-img-box">
+                1. GAMBAR CAPTCHA -->
+                <!-- <div class="captcha-img-box"> -->
                     <!-- Saya menggunakan jalur manual yang lebih aman dan menghapus javascript auto-load yang berisiko error -->
-                    <img src="<?= app_config()['base_url'] ?>/public/captcha.php?t=<?= mt_rand() ?>" id="captcha-image" alt="CAPTCHA">
-                </div>
+                    <!-- <img src="<?= app_config()['base_url'] ?>/public/captcha.php?t=<?= mt_rand() ?>" id="captcha-image" alt="CAPTCHA"> -->
+                <!-- </div> -->
                 <!-- 3. INPUT USER -->
-                <input type="text" name="captcha_input" class="input-captcha" placeholder="Masukan kode" autocomplete="off" required>
-            </div>
+                <!-- <input type="text" name="captcha_input" class="input-captcha" placeholder="Masukan kode" autocomplete="off" required> -->
+            <!-- </div> -->
 
             <button type="submit" class="btn-login">Daftar</button>
         </form>

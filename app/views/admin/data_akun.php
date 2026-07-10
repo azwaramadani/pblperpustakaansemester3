@@ -1,7 +1,7 @@
 <?php
 //declare pagination
-$pagination        = $pagination ?? ['page'=>1, 'total_pages'=>1, 'limit'=>10, 'total'=>count($users)];
-$paginationregist  = $paginationregist ?? ['page'=>1, 'total_pages'=>1, 'limit'=>10, 'total'=>count($userregist)];
+$pagination        = $pagination ?? ['page' => 1, 'total_pages' => 1, 'limit' => 10, 'total' => count($users)];
+$paginationregist  = $paginationregist ?? ['page' => 1, 'total_pages' => 1, 'limit' => 10, 'total' => count($userregist)];
 
 // pagination user regist
 $perPageRegist     = (int)($paginationregist['limit'] ?? 10);
@@ -17,9 +17,9 @@ $maxLinksRegist   = 5;
 $startPageRegist  = max(1, $currentPageRegist - 2);
 $endPageRegist    = min($totalPagesRegist, $currentPageRegist + 2);
 if (($endPageRegist - $startPageRegist + 1) < $maxLinksRegist) {
-    $neededRegist    = $maxLinksRegist - ($endPageRegist - $startPageRegist + 1);
-    $startPageRegist = max(1, $startPageRegist - $neededRegist);
-    $endPageRegist   = min($totalPagesRegist, $startPageRegist + $maxLinksRegist - 1);
+  $neededRegist    = $maxLinksRegist - ($endPageRegist - $startPageRegist + 1);
+  $startPageRegist = max(1, $startPageRegist - $neededRegist);
+  $endPageRegist   = min($totalPagesRegist, $startPageRegist + $maxLinksRegist - 1);
 }
 $noDataRegist        = $totalRowsRegist === 0;
 $disablePrevRegist   = $noDataRegist || $currentPageRegist <= 1;
@@ -47,9 +47,9 @@ $maxLinks   = 5;
 $startPage  = max(1, $currentPage - 2);
 $endPage    = min($totalPages, $currentPage + 2);
 if (($endPage - $startPage + 1) < $maxLinks) {
-    $needed    = $maxLinks - ($endPage - $startPage + 1);
-    $startPage = max(1, $startPage - $needed);
-    $endPage   = min($totalPages, $startPage + $maxLinks - 1);
+  $needed    = $maxLinks - ($endPage - $startPage + 1);
+  $startPage = max(1, $startPage - $needed);
+  $endPage   = min($totalPages, $startPage + $maxLinks - 1);
 }
 $noData        = $totalRows === 0;
 $disablePrev   = $noData || $currentPage <= 1;
@@ -58,6 +58,7 @@ $disableNext   = $noData || $currentPage >= $totalPages;
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,545 +69,550 @@ $disableNext   = $noData || $currentPage >= $totalPages;
 </head>
 
 <body class="admin-body">
-<div class="admin-layout">
-  <aside class="sidebar">
-    <div class="brand">
-      <img src="<?= app_config()['base_url'] ?>/public/assets/image/LogoRudy.png" alt="Rudy">
-    </div>
-    
-    <nav class="sidebar-nav">
-      <a href="?route=Admin/dashboard">
-        <i class="fa-solid fa-chart-line"></i> Dashboard
-      </a>
-      <a href="?route=Admin/dataPeminjaman">
-        <i class="fa-solid fa-calendar-check"></i> Data Peminjaman
-      </a>
-      <a href="?route=Admin/dataRuangan">
-        <i class="fa-solid fa-door-open"></i> Data Ruangan
-      </a>
-      <a href="?route=Admin/dataFromAdminCreateBooking">
-        <i class="fa-solid fa-user-tag"></i> Data Pinjam Admin
-      </a>
-      <a href="?route=Admin/dataAkun" class="active">
-        <i class="fa-solid fa-users"></i> Data Akun
-      </a>
-      <a href="?route=Auth/logout" style="color: var(--danger) !important;">
-        <i class="fa-solid fa-right-from-bracket" style="color: var(--danger) !important;"></i> Keluar
-      </a>
-    </nav>
-
-    <div class="sidebar-footer">
-      <img src="public/assets/image/userlogo.png" class="avatar-img" alt="Admin">
-      <div class="user-info">
-        <span class="name"><?=  htmlspecialchars($admin['username']) ?></span>
-        <span style="font-size:11px; color:#6b7280;">Administrator</span>
+  <div class="admin-layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="<?= app_config()['base_url'] ?>/public/assets/image/LogoRudy.png" alt="Rudy">
       </div>
-    </div>
-  </aside>
 
-  <div class="main-area">
-    <header class="top-nav">
-      <div class="nav-brand">
-        <div>
-          <h2 style="margin:0;">Data Akun User</h2>
-          <p style="margin:4px 0 0;">Data akun user aplikasi RUDY</p>
-        </div>
-      </div>
-      <div class="header-actions">
-        <a href="?route=Admin/exportakun" class="btn-laporan">
-            <i class="fa-solid fa-plus"></i> Buat Laporan
+      <nav class="sidebar-nav">
+        <a href="?route=Admin/dashboard">
+          <i class="fa-solid fa-chart-line"></i> Dashboard
         </a>
-      </div>
-    </header>
+        <a href="?route=Admin/dataPeminjaman">
+          <i class="fa-solid fa-calendar-check"></i> Data Peminjaman
+        </a>
+        <a href="?route=Admin/dataRuangan">
+          <i class="fa-solid fa-door-open"></i> Data Ruangan
+        </a>
+        <a href="?route=Admin/dataFromAdminCreateBooking">
+          <i class="fa-solid fa-user-tag"></i> Data Pinjam Admin
+        </a>
+        <a href="?route=Admin/dataAkun" class="active">
+          <i class="fa-solid fa-users"></i> Data Akun
+        </a>
+        <a href="?route=Auth/logout" style="color: var(--danger) !important;">
+          <i class="fa-solid fa-right-from-bracket" style="color: var(--danger) !important;"></i> Keluar
+        </a>
+      </nav>
 
-    <main class="content">
-      <!-- Flash Messages -->
-      <?php if (!empty($success = $flash['success'])): ?>
-        <div class="flash success"><?= htmlspecialchars($success) ?></div>
-      <?php endif; ?>
-      <?php if (!empty($error = $flash['error'])): ?>
-        <div class="flash error"><?= htmlspecialchars($error) ?></div>
-      <?php endif; ?>
-    
-      <!-- TABEL 1: USER VALIDASI -->
-      <section class="panel">
-        <div class="section-head">
+      <div class="sidebar-footer">
+        <img src="public/assets/image/userlogo.png" class="avatar-img" alt="Admin">
+        <div class="user-info">
+          <span class="name"><?= htmlspecialchars($admin['username']) ?></span>
+          <span style="font-size:11px; color:#6b7280;">Administrator</span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-area">
+      <header class="top-nav">
+        <div class="nav-brand">
           <div>
-            <h3>Akun User Pending</h3>
-            <p class="subtitle">Data semua akun user yang harus divalidasi.</p>
+            <h2 style="margin:0;">Data Akun User</h2>
+            <p style="margin:4px 0 0;">Data akun user aplikasi RUDY</p>
           </div>
         </div>
+        <div class="header-actions">
+          <a href="?route=Admin/exportakun" class="btn-laporan">
+            <i class="fa-solid fa-plus"></i> Buat Laporan
+          </a>
+        </div>
+      </header>
 
-        <form class="filter-bar" method="GET" action="">
-          <input type="hidden" name="route" value="Admin/dataAkun">
+      <main class="content">
+        <!-- Flash Messages -->
+        <?php if (!empty($success = $flash['success'])): ?>
+          <div class="flash success"><?= htmlspecialchars($success) ?></div>
+        <?php endif; ?>
+        <?php if (!empty($error = $flash['error'])): ?>
+          <div class="flash error"><?= htmlspecialchars($error) ?></div>
+        <?php endif; ?>
 
-          <label>Urut waktu dibuat</label>
-          <select name="sort_dateregist">
-            <option value="desc" <?= ($filtersregist['sort_dateregist'] === 'desc') ? 'selected' : '' ?>>Terbaru &uarr;</option>
-            <option value="asc"  <?= ($filtersregist['sort_dateregist'] === 'asc')  ? 'selected' : '' ?>>Terlama &darr;</option>
-          </select>
-
-          <label>Dari</label>
-          <input type="date" name="from_dateregist" value="<?= htmlspecialchars($filtersregist['from_dateregist']) ?>">
-
-          <label>Sampai</label>
-          <input type="date" name="to_dateregist" value="<?= htmlspecialchars($filtersregist['to_dateregist']) ?>">
-
-          <label>Jurusan</label>
-          <select name="jurusanregist">
-            <option value="">Semua</option>
-            <?php foreach ($jurusanList as $jrlregist): ?>
-              <option value="<?= htmlspecialchars($jrlregist) ?>" <?= ($filtersregist['jurusanregist'] === $jrlregist ? 'selected' : '') ?>><?= htmlspecialchars($jrlregist) ?></option>
-            <?php endforeach; ?>
-          </select>
-
-          <label>Program Studi</label>
-          <select name="program_studiregist">
-            <option value="">Semua</option>
-            <?php foreach ($prodiList as $prlregist): ?>
-              <option value="<?= htmlspecialchars($prlregist) ?>" <?= ($filtersregist['program_studiregist'] === $prlregist ? 'selected' :'') ?>><?= htmlspecialchars($prlregist) ?></option>
-            <?php endforeach; ?>
-          </select>
-
-          <label>Status Akun</label>
-          <select name="status_akunregist">
-            <option value="">Semua</option>
-            <?php foreach ($statusakunList as $stlregist): ?>
-              <option value="<?= htmlspecialchars($stlregist) ?>" <?= ($filtersregist['status_akunregist'] === $stlregist ? 'selected' : '') ?>><?= htmlspecialchars($stlregist) ?></option>
-            <?php endforeach; ?>
-          </select>
-          
-          <div class="search-bar" style="margin-left:auto;">
-            <input
-              type="text"
-              name="keywordregist"
-              placeholder="Cari nama atau NIM/NIP..."
-              value="<?= htmlspecialchars($filtersregist['keywordregist']) ?>">
-            <button type="submit" aria-label="Cari">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="7"></circle>
-                <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
-              </svg>
-            </button>
+        <!-- TABEL 1: USER VALIDASI -->
+        <section class="panel">
+          <div class="section-head">
+            <div>
+              <h3>Akun User Pending</h3>
+              <p class="subtitle">Data semua akun user yang harus divalidasi.</p>
+            </div>
           </div>
 
-          <button type="submit" class="btn-filter">Terapkan</button>
-          <a class="btn-reset" href="?route=Admin/dataakun">Reset</a>
-        </form>
+          <form class="filter-bar" method="GET" action="">
+            <input type="hidden" name="route" value="Admin/dataAkun">
 
-        <div class="table-wrap">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Role</th>
-                <th>Unit</th>
-                <th>Jurusan</th>
-                <th>Program Studi</th>
-                <th>NIM/NIP</th>
-                <th>No HP</th>
-                <th>Email</th>
-                <th>Bukti Aktivasi</th>
-                <th>Waktu Dibuat</th>
-                <th>Status Akun</th>
-                <th>Alasan ditolak</th>
-                <th>Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php if (empty($userregist)): ?>
-                <tr><td colspan="13" style="text-align:center; padding:20px;">Semua user sudah divalidasi.</td></tr>
-              <?php else: ?>
-                <?php $rowNumber = $startRow ?: 1; ?>
-                <?php foreach ($userregist as $ur): ?>
-                  <?php
+            <label>Urut waktu dibuat</label>
+            <select name="sort_dateregist">
+              <option value="desc" <?= ($filtersregist['sort_dateregist'] === 'desc') ? 'selected' : '' ?>>Terbaru &uarr;</option>
+              <option value="asc" <?= ($filtersregist['sort_dateregist'] === 'asc')  ? 'selected' : '' ?>>Terlama &darr;</option>
+            </select>
+
+            <label>Dari</label>
+            <input type="date" name="from_dateregist" value="<?= htmlspecialchars($filtersregist['from_dateregist']) ?>">
+
+            <label>Sampai</label>
+            <input type="date" name="to_dateregist" value="<?= htmlspecialchars($filtersregist['to_dateregist']) ?>">
+
+            <label>Jurusan</label>
+            <select name="jurusanregist">
+              <option value="">Semua</option>
+              <?php foreach ($jurusanList as $jrlregist): ?>
+                <option value="<?= htmlspecialchars($jrlregist) ?>" <?= ($filtersregist['jurusanregist'] === $jrlregist ? 'selected' : '') ?>><?= htmlspecialchars($jrlregist) ?></option>
+              <?php endforeach; ?>
+            </select>
+
+            <label>Program Studi</label>
+            <select name="program_studiregist">
+              <option value="">Semua</option>
+              <?php foreach ($prodiList as $prlregist): ?>
+                <option value="<?= htmlspecialchars($prlregist) ?>" <?= ($filtersregist['program_studiregist'] === $prlregist ? 'selected' : '') ?>><?= htmlspecialchars($prlregist) ?></option>
+              <?php endforeach; ?>
+            </select>
+
+            <label>Status Akun</label>
+            <select name="status_akunregist">
+              <option value="">Semua</option>
+              <?php foreach ($statusakunList as $stlregist): ?>
+                <option value="<?= htmlspecialchars($stlregist) ?>" <?= ($filtersregist['status_akunregist'] === $stlregist ? 'selected' : '') ?>><?= htmlspecialchars($stlregist) ?></option>
+              <?php endforeach; ?>
+            </select>
+
+            <div class="search-bar" style="margin-left:auto;">
+              <input
+                type="text"
+                name="keywordregist"
+                placeholder="Cari nama atau NIM/NIP..."
+                value="<?= htmlspecialchars($filtersregist['keywordregist']) ?>">
+              <button type="submit" aria-label="Cari">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="7"></circle>
+                  <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+              </button>
+            </div>
+
+            <button type="submit" class="btn-filter">Terapkan</button>
+            <a class="btn-reset" href="?route=Admin/dataakun">Reset</a>
+          </form>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Nama</th>
+                  <th>Role</th>
+                  <th>Unit</th>
+                  <th>Jurusan</th>
+                  <th>Program Studi</th>
+                  <th>NIM/NIP</th>
+                  <th>No HP</th>
+                  <th>Email</th>
+                  <th>Bukti Aktivasi</th>
+                  <th>Waktu Dibuat</th>
+                  <th>Status Akun</th>
+                  <th>Alasan ditolak</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php if (empty($userregist)): ?>
+                  <tr>
+                    <td colspan="13" style="text-align:center; padding:20px;">Semua user sudah divalidasi.</td>
+                  </tr>
+                <?php else: ?>
+                  <?php $rowNumber = $startRow ?: 1; ?>
+                  <?php foreach ($userregist as $ur): ?>
+                    <?php
                     $img = $ur['bukti_aktivasi'] ?: '';
-                    $imgUrl = $img ? (preg_match('#^https?://#i', $img) ? $img : app_config()['base_url'].'/'.ltrim($img,'/')) : '';
+                    $imgUrl = $img ? (preg_match('#^https?://#i', $img) ? $img : app_config()['base_url'] . '/' . ltrim($img, '/')) : '';
                     $statusKey = strtolower($ur['status_akun']);
-                  ?>
-                  <tr>
-                    <td><?= $rowNumber++ ?></td>
-                    <td><?= htmlspecialchars($ur['nama'] ?? '-') ?></td>
-                    <td><?= htmlspecialchars($ur['role'] ?? '-') ?></td>
-                    <td><?= htmlspecialchars($ur['unit'] ?? '-') ?></td>
-                    <td><?= htmlspecialchars($ur['jurusan'] ?? '-') ?></td>
-                    <td><?= htmlspecialchars($ur['program_studi'] ?? '-')?></td>
-                    <td><?= htmlspecialchars($ur['nim_nip'] ?? '-') ?></td>
-                    <td><?= htmlspecialchars($ur['no_hp'] ?? '-') ?></td>
-                    <td><?= htmlspecialchars($ur['email'] ?? '-') ?></td>
-                    <td>
-                      <?php if ($imgUrl): ?>
-                        <a href="<?= $imgUrl ?>" target="_blank" rel="noopener">
-                          <img src="<?= $imgUrl ?>" alt="Bukti" class="img-thumb">
-                        </a>
-                      <?php else: ?>
-                        -
-                      <?php endif; ?>
-                    </td>
-                    <td><?= $ur['created_at'] ? date('d M Y H:i', strtotime($ur['created_at'])) : '-' ?></td>
-                    <td>
-                      <span class="status-chip status-<?= $statusKey ?>"><?= htmlspecialchars($ur['status_akun']) ?></span>
-                    </td>
-                    <td>
-                      "<?= htmlspecialchars($ur['rejection_reason'] ?? '-') ?>"
-                    </td>
-                    <td>
-                      <!-- BUTTON UBAH STATUS -->
-                      <button class="aksi-btn js-open-modal"
-                              data-id="<?= $ur['user_id'] ?>"
-                              data-status="<?= htmlspecialchars($ur['status_akun']) ?>">
-                        Ubah Status
-                      </button>
-                      
-                      <!-- BUTTON HAPUS (MODIFIED) -->
-                      <button class="aksi-btn danger js-open-delete" 
-                              data-id="<?= $ur['user_id'] ?>">
+                    ?>
+                    <tr>
+                      <td><?= $rowNumber++ ?></td>
+                      <td><?= htmlspecialchars($ur['nama'] ?? '-') ?></td>
+                      <td><?= htmlspecialchars($ur['role'] ?? '-') ?></td>
+                      <td><?= htmlspecialchars($ur['unit'] ?? '-') ?></td>
+                      <td><?= htmlspecialchars($ur['jurusan'] ?? '-') ?></td>
+                      <td><?= htmlspecialchars($ur['program_studi'] ?? '-') ?></td>
+                      <td><?= htmlspecialchars($ur['nim_nip'] ?? '-') ?></td>
+                      <td><?= htmlspecialchars($ur['no_hp'] ?? '-') ?></td>
+                      <td><?= htmlspecialchars($ur['email'] ?? '-') ?></td>
+                      <td>
+                        <?php if ($imgUrl): ?>
+                          <a href="<?= $imgUrl ?>" target="_blank" rel="noopener">
+                            <img src="<?= $imgUrl ?>" alt="Bukti" class="img-thumb">
+                          </a>
+                        <?php else: ?>
+                          -
+                        <?php endif; ?>
+                      </td>
+                      <td><?= $ur['created_at'] ? date('d M Y H:i', strtotime($ur['created_at'])) : '-' ?></td>
+                      <td>
+                        <span class="status-chip status-<?= $statusKey ?>"><?= htmlspecialchars($ur['status_akun']) ?></span>
+                      </td>
+                      <td>
+                        "<?= htmlspecialchars($ur['rejection_reason'] ?? '-') ?>"
+                      </td>
+                      <td>
+                        <!-- BUTTON UBAH STATUS -->
+                        <button class="aksi-btn js-open-modal"
+                          data-id="<?= $ur['user_id'] ?>"
+                          data-status="<?= htmlspecialchars($ur['status_akun']) ?>">
+                          Ubah Status
+                        </button>
+
+                        <!-- BUTTON HAPUS (MODIFIED) -->
+                        <button class="aksi-btn danger js-open-delete"
+                          data-id="<?= $ur['user_id'] ?>">
                           Hapus Akun
-                      </button>
-                    </td>
-                  </tr>
-                <?php endforeach; ?>
-              <?php endif; ?>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="pagination-bar">
-          <div class="pagination-info">
-            Menampilkan <?= $startRowRegist ? "{$startRowRegist} - {$endRowRegist}" : "0" ?> dari <?= $totalRowsRegist ?> Data.
+                        </button>
+                      </td>
+                    </tr>
+                  <?php endforeach; ?>
+                <?php endif; ?>
+              </tbody>
+            </table>
           </div>
-          <div class="pagination-nav">
-            <a class="page-btn secondary <?= $disablePrevRegist ? 'disabled' : '' ?>" href="?<?= $baseQuery ?>page=1">« Pertama</a>
-            <a class="page-btn secondary <?= $disablePrevRegist ? 'disabled' : '' ?>" href="?<?= $baseQuery ?>page=<?= max(1, $currentPageRegist - 1) ?>">‹ Sebelumnya</a>
 
-            <?php for ($p = $startPageRegist; $p <= $endPageRegist; $p++): ?>
-              <a class="page-btn <?= ($p === $currentPageRegist) ? 'active' : 'secondary' ?>" href="?<?= $baseQuery ?>page=<?= $p ?>"><?= $p ?></a>
-            <?php endfor; ?>
+          <div class="pagination-bar">
+            <div class="pagination-info">
+              Menampilkan <?= $startRowRegist ? "{$startRowRegist} - {$endRowRegist}" : "0" ?> dari <?= $totalRowsRegist ?> Data.
+            </div>
+            <div class="pagination-nav">
+              <a class="page-btn secondary <?= $disablePrevRegist ? 'disabled' : '' ?>" href="?<?= $baseQuery ?>page=1">« Pertama</a>
+              <a class="page-btn secondary <?= $disablePrevRegist ? 'disabled' : '' ?>" href="?<?= $baseQuery ?>page=<?= max(1, $currentPageRegist - 1) ?>">‹ Sebelumnya</a>
 
-            <a class="page-btn secondary <?= $disableNextRegist ? 'disabled' : '' ?>" href="?<?= $baseQuery ?>page=<?= min($totalPagesRegist, $currentPageRegist + 1) ?>">Berikutnya ›</a>
-            <a class="page-btn secondary <?= $disableNextRegist ? 'disabled' : '' ?>" href="?<?= $baseQuery ?>page=<?= $totalPagesRegist ?>">Terakhir »</a>
+              <?php for ($p = $startPageRegist; $p <= $endPageRegist; $p++): ?>
+                <a class="page-btn <?= ($p === $currentPageRegist) ? 'active' : 'secondary' ?>" href="?<?= $baseQuery ?>page=<?= $p ?>"><?= $p ?></a>
+              <?php endfor; ?>
+
+              <a class="page-btn secondary <?= $disableNextRegist ? 'disabled' : '' ?>" href="?<?= $baseQuery ?>page=<?= min($totalPagesRegist, $currentPageRegist + 1) ?>">Berikutnya ›</a>
+              <a class="page-btn secondary <?= $disableNextRegist ? 'disabled' : '' ?>" href="?<?= $baseQuery ?>page=<?= $totalPagesRegist ?>">Terakhir »</a>
+            </div>
           </div>
-        </div>
-      </section>
-  
-      <!-- TABEL 2: SEMUA USER -->
-      <section class="panel">
-        <div class="section-head">
-          <div>
-            <h3>Daftar Semua User</h3>
-            <p class="subtitle">Data lengkap seluruh akun user terdaftar.</p>
+        </section>
+
+        <!-- TABEL 2: SEMUA USER -->
+        <section class="panel">
+          <div class="section-head">
+            <div>
+              <h3>Daftar Semua User</h3>
+              <p class="subtitle">Data lengkap seluruh akun user terdaftar.</p>
+            </div>
           </div>
-        </div>
 
-        <!-- Filter/sort dan search-->
-        <form class="filter-bar" method="GET" action="">
-          <input type="hidden" name="route" value="Admin/dataAkun">
+          <!-- Filter/sort dan search-->
+          <form class="filter-bar" method="GET" action="">
+            <input type="hidden" name="route" value="Admin/dataAkun">
 
-          <label>Urut waktu dibuat</label>
-          <select name="sort_date">
-            <option value="desc" <?= ($filters['sort_date'] === 'desc') ? 'selected' : '' ?>>Terbaru &uarr;</option>
-            <option value="asc"  <?= ($filters['sort_date'] === 'asc')  ? 'selected' : '' ?>>Terlama &darr;</option>
-          </select>
+            <label>Urut waktu dibuat</label>
+            <select name="sort_date">
+              <option value="desc" <?= ($filters['sort_date'] === 'desc') ? 'selected' : '' ?>>Terbaru &uarr;</option>
+              <option value="asc" <?= ($filters['sort_date'] === 'asc')  ? 'selected' : '' ?>>Terlama &darr;</option>
+            </select>
 
-          <label>Dari</label>
-          <input type="date" name="from_date" value="<?= htmlspecialchars($filters['from_date']) ?>">
+            <label>Dari</label>
+            <input type="date" name="from_date" value="<?= htmlspecialchars($filters['from_date']) ?>">
 
-          <label>Sampai</label>
-          <input type="date" name="to_date" value="<?= htmlspecialchars($filters['to_date']) ?>">
+            <label>Sampai</label>
+            <input type="date" name="to_date" value="<?= htmlspecialchars($filters['to_date']) ?>">
 
-          <label>Role</label>
-          <select name="role">
-            <option value="">Semua</option>
-            <?php foreach ($roleList as $rl): ?>
-              <option value="<?= htmlspecialchars($rl) ?>" <?= ($filters['role'] === $rl ? 'selected' : '') ?>><?= htmlspecialchars($rl) ?></option>
-            <?php endforeach; ?>
-          </select>
-          
-          <label>Unit</label>
-          <select name="unit">
-            <option value="">Semua</option>
-            <?php foreach ($unitList as $unl): ?>
-              <option value="<?= htmlspecialchars($unl) ?>" <?= ($filters['unit'] === $unl ? 'selected' : '') ?>><?= htmlspecialchars($unl) ?></option>
-            <?php endforeach; ?>
-          </select>
+            <label>Role</label>
+            <select name="role">
+              <option value="">Semua</option>
+              <?php foreach ($roleList as $rl): ?>
+                <option value="<?= htmlspecialchars($rl) ?>" <?= ($filters['role'] === $rl ? 'selected' : '') ?>><?= htmlspecialchars($rl) ?></option>
+              <?php endforeach; ?>
+            </select>
 
-          <label>Jurusan</label>
-          <select name="jurusan">
-            <option value="">Semua</option>
-            <?php foreach ($jurusanList as $jrl): ?>
-              <option value="<?= htmlspecialchars($jrl) ?>" <?= ($filters['jurusan'] === $jrl ? 'selected' : '') ?>><?= htmlspecialchars($jrl) ?></option>
-            <?php endforeach; ?>
-          </select>
+            <label>Unit</label>
+            <select name="unit">
+              <option value="">Semua</option>
+              <?php foreach ($unitList as $unl): ?>
+                <option value="<?= htmlspecialchars($unl) ?>" <?= ($filters['unit'] === $unl ? 'selected' : '') ?>><?= htmlspecialchars($unl) ?></option>
+              <?php endforeach; ?>
+            </select>
 
-          <label>Program Studi</label>
-          <select name="program_studi">
-            <option value="">Semua</option>
-            <?php foreach ($prodiList as $prl): ?>
-              <option value="<?= htmlspecialchars($prl) ?>" <?= ($filters['program_studi'] === $prl ? 'selected' : '') ?>><?= htmlspecialchars($prl) ?></option>
-            <?php endforeach; ?>
-          </select>
-          <br>
-          
-          <div class="search-bar">
-            <input
-              type="text"
-              name="keyword"
-              placeholder="Cari nama atau NIM/NIP akun..."
-              value="<?= htmlspecialchars($filters['keyword']) ?>">
-            <button type="submit" aria-label="Cari">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            <label>Jurusan</label>
+            <select name="jurusan">
+              <option value="">Semua</option>
+              <?php foreach ($jurusanList as $jrl): ?>
+                <option value="<?= htmlspecialchars($jrl) ?>" <?= ($filters['jurusan'] === $jrl ? 'selected' : '') ?>><?= htmlspecialchars($jrl) ?></option>
+              <?php endforeach; ?>
+            </select>
+
+            <label>Program Studi</label>
+            <select name="program_studi">
+              <option value="">Semua</option>
+              <?php foreach ($prodiList as $prl): ?>
+                <option value="<?= htmlspecialchars($prl) ?>" <?= ($filters['program_studi'] === $prl ? 'selected' : '') ?>><?= htmlspecialchars($prl) ?></option>
+              <?php endforeach; ?>
+            </select>
+            <br>
+
+            <div class="search-bar">
+              <input
+                type="text"
+                name="keyword"
+                placeholder="Cari nama atau NIM/NIP akun..."
+                value="<?= htmlspecialchars($filters['keyword']) ?>">
+              <button type="submit" aria-label="Cari">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                   stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="7"></circle>
-                <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
-              </svg>
-            </button>
-          </div>
+                  <circle cx="11" cy="11" r="7"></circle>
+                  <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+              </button>
+            </div>
 
-          <button type="submit" class="btn-filter">Terapkan</button>
-          <a class="btn-reset" href="?route=Admin/dataakun">Reset</a>
-        </form>
+            <button type="submit" class="btn-filter">Terapkan</button>
+            <a class="btn-reset" href="?route=Admin/dataakun">Reset</a>
+          </form>
 
-        <div class="table-wrap">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Role</th>
-                <th>Unit</th>
-                <th>Jurusan</th>
-                <th>Program Studi</th>
-                <th>NIM/NIP</th>
-                <th>No HP</th>
-                <th>Email</th>
-                <th>Bukti Aktivasi</th>
-                <th>Waktu Dibuat</th>
-                <th>Status Akun</th>
-                <th>Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php if (empty($users)): ?>
-                <tr><td colspan="13" style="text-align:center; padding:20px;">Belum ada data user.</td></tr>
-              <?php else: ?>
-                <?php $rowNumber = $startRow ?: 1; ?>
-                <?php foreach ($users as $u): ?>
-                  <?php
-                    $img = $u['bukti_aktivasi'] ?: '';
-                    $imgUrl = $img ? (preg_match('#^https?://#i', $img) ? $img : app_config()['base_url'].'/'.ltrim($img,'/')) : '';
-                    $statusKey = strtolower($u['status_akun']);
-                  ?>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Nama</th>
+                  <th>Role</th>
+                  <th>Unit</th>
+                  <th>Jurusan</th>
+                  <th>Program Studi</th>
+                  <th>NIM/NIP</th>
+                  <th>No HP</th>
+                  <th>Email</th>
+                  <th>Bukti Aktivasi</th>
+                  <th>Waktu Dibuat</th>
+                  <th>Status Akun</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php if (empty($users)): ?>
                   <tr>
-                    <td><?= $rowNumber++ ?></td>
-                    <td><?= htmlspecialchars($u['nama'] ?? '-') ?></td>
-                    <td><?= htmlspecialchars($u['role'] ?? '-') ?></td>
-                    <td><?= htmlspecialchars($u['unit'] ?? '-') ?></td>
-                    <td><?= htmlspecialchars($u['jurusan'] ?? '-') ?></td>
-                    <td><?= htmlspecialchars($u['program_studi'] ?? '-')?></td>
-                    <td><?= htmlspecialchars($u['nim_nip'] ?? '-') ?></td>
-                    <td><?= htmlspecialchars($u['no_hp'] ?? '-') ?></td>
-                    <td><?= htmlspecialchars($u['email'] ?? '-') ?></td>
-                    <td>
-                      <?php if ($imgUrl): ?>
-                        <a href="<?= $imgUrl ?>" target="_blank" rel="noopener">
-                          <img src="<?= $imgUrl ?>" alt="Bukti" class="img-thumb">
-                        </a>
-                      <?php else: ?>
-                        -
-                      <?php endif; ?>
-                    </td>
-                    <td><?= $u['created_at'] ? date('d M Y H:i', strtotime($u['created_at'])) : '-' ?></td>
-                    <td>
-                      <span class="status-chip status-<?= $statusKey ?>"><?= htmlspecialchars($u['status_akun']) ?></span>
-                    </td>
-                    <td>
-                      <!-- BUTTON UBAH STATUS -->
-                      <button class="aksi-btn js-open-modal"
-                              data-id="<?= $u['user_id'] ?>"
-                              data-status="<?= htmlspecialchars($u['status_akun']) ?>">
-                        Ubah Status
-                      </button>
-                      
-                      <!-- BUTTON HAPUS (MODIFIED) -->
-                      <button class="aksi-btn danger js-open-delete" 
-                              data-id="<?= $u['user_id'] ?>">
-                          Hapus Akun
-                      </button>
-                    </td>
+                    <td colspan="13" style="text-align:center; padding:20px;">Belum ada data user.</td>
                   </tr>
-                <?php endforeach; ?>
-              <?php endif; ?>
-            </tbody>
-          </table>
+                <?php else: ?>
+                  <?php $rowNumber = $startRow ?: 1; ?>
+                  <?php foreach ($users as $u): ?>
+                    <?php
+                    $img = $u['bukti_aktivasi'] ?: '';
+                    $imgUrl = $img ? (preg_match('#^https?://#i', $img) ? $img : app_config()['base_url'] . '/' . ltrim($img, '/')) : '';
+                    $statusKey = strtolower($u['status_akun']);
+                    ?>
+                    <tr>
+                      <td><?= $rowNumber++ ?></td>
+                      <td><?= htmlspecialchars($u['nama'] ?? '-') ?></td>
+                      <td><?= htmlspecialchars($u['role'] ?? '-') ?></td>
+                      <td><?= htmlspecialchars($u['unit'] ?? '-') ?></td>
+                      <td><?= htmlspecialchars($u['jurusan'] ?? '-') ?></td>
+                      <td><?= htmlspecialchars($u['program_studi'] ?? '-') ?></td>
+                      <td><?= htmlspecialchars($u['nim_nip'] ?? '-') ?></td>
+                      <td><?= htmlspecialchars($u['no_hp'] ?? '-') ?></td>
+                      <td><?= htmlspecialchars($u['email'] ?? '-') ?></td>
+                      <td>
+                        <?php if ($imgUrl): ?>
+                          <a href="<?= $imgUrl ?>" target="_blank" rel="noopener">
+                            <img src="<?= $imgUrl ?>" alt="Bukti" class="img-thumb">
+                          </a>
+                        <?php else: ?>
+                          -
+                        <?php endif; ?>
+                      </td>
+                      <td><?= $u['created_at'] ? date('d M Y H:i', strtotime($u['created_at'])) : '-' ?></td>
+                      <td>
+                        <span class="status-chip status-<?= $statusKey ?>"><?= htmlspecialchars($u['status_akun']) ?></span>
+                      </td>
+                      <td>
+                        <!-- BUTTON UBAH STATUS -->
+                        <button class="aksi-btn js-open-modal"
+                          data-id="<?= $u['user_id'] ?>"
+                          data-status="<?= htmlspecialchars($u['status_akun']) ?>">
+                          Ubah Status
+                        </button>
+
+                        <!-- BUTTON HAPUS (MODIFIED) -->
+                        <button class="aksi-btn danger js-open-delete"
+                          data-id="<?= $u['user_id'] ?>">
+                          Hapus Akun
+                        </button>
+                      </td>
+                    </tr>
+                  <?php endforeach; ?>
+                <?php endif; ?>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pagination-bar">
+            <div class="pagination-info">
+              Menampilkan <?= $startRow ? "{$startRow} - {$endRow}" : "0" ?> dari <?= $totalRows ?> Data.
+            </div>
+            <div class="pagination-nav">
+              <a class="page-btn secondary <?= $disablePrev ? 'disabled' : '' ?>" href="?<?= $baseQuery ?>page=1">« Pertama</a>
+              <a class="page-btn secondary <?= $disablePrev ? 'disabled' : '' ?>" href="?<?= $baseQuery ?>page=<?= max(1, $currentPage - 1) ?>">‹ Sebelumnya</a>
+
+              <?php for ($p = $startPage; $p <= $endPage; $p++): ?>
+                <a class="page-btn <?= ($p === $currentPage) ? 'active' : 'secondary' ?>" href="?<?= $baseQuery ?>page=<?= $p ?>"><?= $p ?></a>
+              <?php endfor; ?>
+
+              <a class="page-btn secondary <?= $disableNext ? 'disabled' : '' ?>" href="?<?= $baseQuery ?>page=<?= min($totalPages, $currentPage + 1) ?>">Berikutnya ›</a>
+              <a class="page-btn secondary <?= $disableNext ? 'disabled' : '' ?>" href="?<?= $baseQuery ?>page=<?= $totalPages ?>">Terakhir »</a>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Modal Ubah Status (Tetap Sama) -->
+  <div class="modal-backdrop" id="modalStatus">
+
+    <div class="modal-card">
+      <h4 style="margin-top:0;">Ubah Status Akun</h4>
+      <form method="POST" action="?route=Admin/updateUserStatus" id="statusForm">
+
+        <input type="hidden" name="user_id" id="userIdInput">
+
+        <div class="radio-row" style="margin:20px 0;">
+          <label><input type="radio" name="status_akun" value="Disetujui"> Disetujui</label>
+          <label><input type="radio" name="status_akun" value="Ditolak"> Ditolak</label>
         </div>
 
-        <div class="pagination-bar">
-          <div class="pagination-info">
-            Menampilkan <?= $startRow ? "{$startRow} - {$endRow}" : "0" ?> dari <?= $totalRows ?> Data.
-          </div>
-          <div class="pagination-nav">
-            <a class="page-btn secondary <?= $disablePrev ? 'disabled' : '' ?>" href="?<?= $baseQuery ?>page=1">« Pertama</a>
-            <a class="page-btn secondary <?= $disablePrev ? 'disabled' : '' ?>" href="?<?= $baseQuery ?>page=<?= max(1, $currentPage - 1) ?>">‹ Sebelumnya</a>
-
-            <?php for ($p = $startPage; $p <= $endPage; $p++): ?>
-              <a class="page-btn <?= ($p === $currentPage) ? 'active' : 'secondary' ?>" href="?<?= $baseQuery ?>page=<?= $p ?>"><?= $p ?></a>
-            <?php endfor; ?>
-
-            <a class="page-btn secondary <?= $disableNext ? 'disabled' : '' ?>" href="?<?= $baseQuery ?>page=<?= min($totalPages, $currentPage + 1) ?>">Berikutnya ›</a>
-            <a class="page-btn secondary <?= $disableNext ? 'disabled' : '' ?>" href="?<?= $baseQuery ?>page=<?= $totalPages ?>">Terakhir »</a>
-          </div>
+        <div id="rejectionField" style="display:none; margin-top:10px;">
+          <label>Alasan Penolakan</label>
+          <textarea name="rejection_reason" placeholder="Masukkan alasan..." rows="3"></textarea>
         </div>
-      </section>
-    </main>
-  </div>
-</div>
 
-<!-- Modal Ubah Status (Tetap Sama) -->
-<div class="modal-backdrop" id="modalStatus">
+        <div class="modal-actions" style="text-align:right;">
+          <button type="button" class="btn-pill btn-cancel js-close-modal" style="margin-right:10px;">Batal</button>
+          <button type="submit" class="btn-pill btn-save">Simpan</button>
+        </div>
 
-  <div class="modal-card">
-    <h4 style="margin-top:0;">Ubah Status Akun</h4>
-    <form method="POST" action="?route=Admin/updateUserStatus" id="statusForm">
-
-      <input type="hidden" name="user_id" id="userIdInput">
-
-      <div class="radio-row" style="margin:20px 0;">
-        <label><input type="radio" name="status_akun" value="Disetujui"> Disetujui</label>
-        <label><input type="radio" name="status_akun" value="Ditolak"> Ditolak</label>
-      </div>
-
-      <div id="rejectionField" style="display:none; margin-top:10px;">
-        <label>Alasan Penolakan</label>
-        <textarea name="rejection_reason" placeholder="Masukkan alasan..." rows="3"></textarea>
-      </div>
-
-      <div class="modal-actions" style="text-align:right;">
-        <button type="button" class="btn-pill btn-cancel js-close-modal" style="margin-right:10px;">Batal</button>
-        <button type="submit" class="btn-pill btn-save">Simpan</button>
-      </div>
-
-    </form>
-  </div>
-
-</div>
-
-<!-- MODAL HAPUS AKUN (DESAIN BARU) -->
-<div class="modal-backdrop" id="modalDelete">
-  <div class="modal-card modal-delete-custom">
-    
-    <!-- Icon Tong Sampah -->
-    <div class="modal-delete-icon">
-        <i class="fa-regular fa-trash-can"></i>
+      </form>
     </div>
 
-    <!-- Judul -->
-    <h4 class="modal-delete-title">
-        Apakah anda yakin<br>ingin menghapus?
-    </h4>
-
-    <form method="POST" action="?route=Admin/deleteUser" id="deleteForm">
-      <input type="hidden" name="user_id" id="deleteUserIdInput">
-      
-      <!-- Tombol Hapus (Merah) -->
-      <button type="submit" class="btn-delete-confirm">
-        Hapus
-      </button>
-
-      <!-- Tombol Batal (Putih/Border) -->
-      <button type="button" class="btn-delete-cancel js-close-delete">
-        Batal
-      </button>
-    </form>
   </div>
-</div>
 
-<script>
-   // Script Modal Ubah Status
-  const modal = document.getElementById('modalStatus');
-  const idInput = document.getElementById('userIdInput');
-  const radios = document.querySelectorAll('input[name="status_akun"]');
-  const rejectionField = document.getElementById('rejectionField');
-  const rejectionInput = document.querySelector('[name="rejection_reason"]');
+  <!-- MODAL HAPUS AKUN (DESAIN BARU) -->
+  <div class="modal-backdrop" id="modalDelete">
+    <div class="modal-card modal-delete-custom">
 
-  // =========================
-  // 1. EVENT RADIO (JALAN SEKALI)
-  // =========================
-  radios.forEach(radio => {
-    radio.addEventListener('change', () => {
-      if (radio.value === 'Ditolak' && radio.checked) {
-        rejectionField.style.display = 'block';
-      } else if (radio.value === 'Disetujui' && radio.checked) {
-        rejectionField.style.display = 'none';
-        rejectionInput.value = ''; // reset isi kalau balik ke disetujui
-      }
-    });
-  });
+      <!-- Icon Tong Sampah -->
+      <div class="modal-delete-icon">
+        <i class="fa-regular fa-trash-can"></i>
+      </div>
 
-  // =========================
-  // 2. OPEN MODAL
-  // =========================
-  document.querySelectorAll('.js-open-modal').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const id = btn.dataset.id;
-      const status = btn.dataset.status || '';
+      <!-- Judul -->
+      <h4 class="modal-delete-title">
+        Apakah anda yakin<br>ingin menghapus?
+      </h4>
 
-      idInput.value = id;
+      <form method="POST" action="?route=Admin/deleteUser" id="deleteForm">
+        <input type="hidden" name="user_id" id="deleteUserIdInput">
 
-      // set radio sesuai status
-      radios.forEach(r => {
-        r.checked = (r.value === status);
+        <!-- Tombol Hapus (Merah) -->
+        <button type="submit" class="btn-delete-confirm">
+          Hapus
+        </button>
+
+        <!-- Tombol Batal (Putih/Border) -->
+        <button type="button" class="btn-delete-cancel js-close-delete">
+          Batal
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Script Modal Ubah Status
+    const modal = document.getElementById('modalStatus');
+    const idInput = document.getElementById('userIdInput');
+    const radios = document.querySelectorAll('input[name="status_akun"]');
+    const rejectionField = document.getElementById('rejectionField');
+    const rejectionInput = document.querySelector('[name="rejection_reason"]');
+
+    // =========================
+    // 1. EVENT RADIO (JALAN SEKALI)
+    // =========================
+    radios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        if (radio.value === 'Ditolak' && radio.checked) {
+          rejectionField.style.display = 'block';
+        } else if (radio.value === 'Disetujui' && radio.checked) {
+          rejectionField.style.display = 'none';
+          rejectionInput.value = ''; // reset isi kalau balik ke disetujui
+        }
       });
+    });
 
-      // reset dulu
-      rejectionField.style.display = 'none';
-      rejectionInput.value = '';
+    // =========================
+    // 2. OPEN MODAL
+    // =========================
+    document.querySelectorAll('.js-open-modal').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.id;
+        const status = btn.dataset.status || '';
 
-      // kalau status sebelumnya Ditolak → tampilkan field
-      if (status === 'Ditolak') {
-        rejectionField.style.display = 'block';
+        idInput.value = id;
+
+        // set radio sesuai status
+        radios.forEach(r => {
+          r.checked = (r.value === status);
+        });
+
+        // reset dulu
+        rejectionField.style.display = 'none';
+        rejectionInput.value = '';
+
+        // kalau status sebelumnya Ditolak → tampilkan field
+        if (status === 'Ditolak') {
+          rejectionField.style.display = 'block';
+        }
+
+        modal.style.display = 'flex';
+      });
+    });
+
+    // =========================
+    // 3. CLOSE MODAL
+    // =========================
+    document.querySelectorAll('.js-close-modal').forEach(btn => {
+      btn.addEventListener('click', () => {
+        modal.style.display = 'none';
+      });
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
       }
-
-      modal.style.display = 'flex';
     });
-  });
 
-  // =========================
-  // 3. CLOSE MODAL
-  // =========================
-  document.querySelectorAll('.js-close-modal').forEach(btn => {
-    btn.addEventListener('click', () => {
-      modal.style.display = 'none';
+
+    // Script Modal Hapus Akun
+    const modalDelete = document.getElementById('modalDelete');
+    const deleteIdInput = document.getElementById('deleteUserIdInput');
+
+    document.querySelectorAll('.js-open-delete').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.id;
+        deleteIdInput.value = id;
+        modalDelete.style.display = 'flex';
+      });
     });
-  });
 
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.style.display = 'none';
-    }
-  });
-
-
-  // Script Modal Hapus Akun
-  const modalDelete = document.getElementById('modalDelete');
-  const deleteIdInput = document.getElementById('deleteUserIdInput');
-
-  document.querySelectorAll('.js-open-delete').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const id = btn.dataset.id;
-      deleteIdInput.value = id;
-      modalDelete.style.display = 'flex';
+    document.querySelectorAll('.js-close-delete').forEach(btn => {
+      btn.addEventListener('click', () => modalDelete.style.display = 'none');
     });
-  });
 
-  document.querySelectorAll('.js-close-delete').forEach(btn => {
-    btn.addEventListener('click', () => modalDelete.style.display = 'none');
-  });
-
-  modalDelete.addEventListener('click', (e) => {
-    if (e.target === modalDelete) modalDelete.style.display = 'none';
-  });
-</script>
+    modalDelete.addEventListener('click', (e) => {
+      if (e.target === modalDelete) modalDelete.style.display = 'none';
+    });
+  </script>
 </body>
+
 </html>

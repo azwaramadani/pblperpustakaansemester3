@@ -1,13 +1,13 @@
 <?php
 require_once __DIR__ . '/../../core/Session.php';
 
-class UserController 
+class UserController
 {
-    public function viewProfile() 
+    public function viewProfile()
     {
         Session::CheckUserLogin();
         Session::preventCache();
-        
+
         if (!Session::get('user_id')) {
             header('Location: ?route=Auth/Login');
             exit;
@@ -28,7 +28,7 @@ class UserController
         Session::CheckUserLogin();
         Session::preventCache();
 
-        if (!Session::get('user_id')){
+        if (!Session::get('user_id')) {
             header('Location: ?route=Auth/Login');
         }
 
@@ -42,13 +42,13 @@ class UserController
 
         require __DIR__ . '/../views/user/edit_profile.php';
     }
-    
+
     public function updateProfile()
     {
         Session::CheckUserLogin();
         Session::preventCache();
 
-        if (!Session::get('user_id')){
+        if (!Session::get('user_id')) {
             header('Location: ?route=Auth/Login');
         }
 
@@ -69,7 +69,7 @@ class UserController
             'no_hp'     => $_POST['no_hp'],
             'email'     => $_POST['email'],
         ];
-        
+
 
         // validasi nama, nim/nip, sama email tidak boleh kosong
         if (empty($data['nama']) || empty($data['nim_nip']) || empty($data['email'])) {
@@ -90,12 +90,12 @@ class UserController
         }
 
         // validasi email udah ada, validasi hanya dilakukan ketika user mengubah email, kalau tidak ya tidak perlu validasi
-        if ($data['email'] !== $user['email']) {     
-            if($userModel->isEmailExistsException($data['email'], $user_id)) {
+        if ($data['email'] !== $user['email']) {
+            if ($userModel->isEmailExistsException($data['email'], $user_id)) {
                 Session::set('flash_error', 'Email sudah terdaftar.');
                 Session::setOld($user);
                 header('Location: ?route=User/editProfile');
-                exit;                
+                exit;
             }
         }
 
@@ -105,7 +105,7 @@ class UserController
         // flash success
         Session::set('flash_success', 'Data berhasil diubah.');
         header('Location: ?route=User/viewProfile');
-        exit;   
+        exit;
     }
 
     public function home()
@@ -157,7 +157,8 @@ class UserController
                 } else {
                     $room['status_display'] = 'Tersedia';
                     $room['status_class']   = 'available';
-                }} else {
+                }
+            } else {
                 // tidak tersedia dari admin
                 $room['status_display'] = 'Tidak Tersedia';
                 $room['status_class']   = 'unavailable';
@@ -185,7 +186,7 @@ class UserController
 
         //proses data riwayat
         $riwayat    = [];
-        
+
         foreach ($riwayatRaw as $row) {
             $bookingId     = $row['booking_id'];
             $namaRuangan   = $row['nama_ruangan'] ?? '-';
@@ -218,7 +219,7 @@ class UserController
                 'sudah_feedback' => $sudahFeedback
             ];
         }
-        
+
         require __DIR__ . '/../views/user/riwayat.php';
     }
 
@@ -235,11 +236,11 @@ class UserController
         if (empty($tanggal)) {
             return '-';
         }
-        
+
         // Ubah format tanggal
         return date('d M Y', strtotime($tanggal));
     }
-    
+
     /**
      * Gabungkan jam mulai dan jam selesai menjadi rentang waktu
      * Contoh: '09:00:00' dan '11:00:00' menjadi '09:00 - 11:00'
@@ -255,13 +256,13 @@ class UserController
         if (!empty($jamMulai)) {
             $mulai = date('H:i', strtotime($jamMulai));
         }
-        
+
         // Format jam selesai (ambil jam dan menit saja)
         $selesai = '';
         if (!empty($jamSelesai)) {
             $selesai = date('H:i', strtotime($jamSelesai));
         }
-        
+
         // Gabungkan jam mulai dan selesai
         if ($mulai && $selesai) {
             // Kalau kedua jam ada, gabung dengan ' - '
@@ -276,10 +277,10 @@ class UserController
             // Kalau kedua jam kosong
             $hasil = '-';
         }
-        
+
         return $hasil;
     }
-    
+
     /**
      * Build URL lengkap untuk gambar
      * Support URL eksternal (http/https) dan path lokal
@@ -293,29 +294,30 @@ class UserController
         if (empty($gambar)) {
             $gambar = 'public/assets/image/contohruangan.png';
         }
-        
+
         // Cek apakah gambar sudah berupa URL lengkap (http:// atau https://)
         $isUrlLengkap = (strpos($gambar, 'http://') === 0 || strpos($gambar, 'https://') === 0);
-        
+
         if ($isUrlLengkap) {
             // Kalau sudah URL lengkap, langsung return
             return $gambar;
         }
-        
+
         // Kalau path lokal, gabungkan dengan base URL
         $baseUrl = app_config()['base_url'];
-        
+
         // Hapus slash di akhir base URL (kalau ada)
         $baseUrl = rtrim($baseUrl, '/');
-        
+
         // Hapus slash di awal path gambar (kalau ada)
         $gambar = ltrim($gambar, '/');
-        
+
         // Gabungkan base URL dengan path gambar
         return $baseUrl . '/' . $gambar;
     }
 
-    private function getFlashMessages(){
+    private function getFlashMessages()
+    {
         return [
             'success'   => Session::flash('flash_success'),
             'error'     => Session::flash('flash_error')

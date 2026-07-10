@@ -11,7 +11,7 @@ class AuthController
         require __DIR__ . '/../views/auth/login_user.php';
     }
 
-    // handler forgot password untuk redirect ke page yang berisi input email sesuai yang didaftarkan
+    // handler untuk redirect ke page forgot password yang berisi input email sesuai yang didaftarkan
     public function forgotPassword()
     {
         $flash = $this->getFlashMessages();
@@ -19,7 +19,7 @@ class AuthController
         require __DIR__ . '/../views/auth/forgot_password.php';
     }
 
-    // handler button submit setelah isi email, untuk kirim link reset ke email user
+    // handler page forgot password button submit setelah isi email, untuk kirim link reset ke email user
     public function sendResetLink()
     {
         $email = trim($_POST['email'] ?? '');
@@ -58,7 +58,7 @@ class AuthController
         header("Location: ?route=Auth/login");
     }
 
-    // handler redirect ke page update password 
+    // handler link reset password dari inbox email user untuk redirect ke page ganti password baru
     public function resetPassword()
     {
         $token = $_GET['token'] ?? '';
@@ -76,7 +76,7 @@ class AuthController
         require __DIR__ . '/../views/auth/reset_password.php';
     }
 
-    // handler
+    // handler submit update password baru setelah user klik link reset password
     public function updatePassword()
     {
         $token = $_POST['token'];
@@ -108,7 +108,7 @@ class AuthController
         Session::set("flash_success", "Password berhasil diubah.");
         header("Location: ?route=Auth/login");
     }
-    
+
     // handler logout
     public function logout()
     {
@@ -134,7 +134,7 @@ class AuthController
         $user = $userModel->findByNIMNIP($nim_nip);
 
         $adminModel = new Admin();
-        $admin = $adminModel->loginAdmin($usernameAdmin); 
+        $admin = $adminModel->loginAdmin($usernameAdmin);
 
         # VALIDASI LOGIN ADMIN
         if ($admin) {
@@ -149,11 +149,11 @@ class AuthController
             exit;
         }
 
-        if ($user['deleted_at']  !== null){
-            Session::set("flash_error", "Akun sudah dihapus, segera hubungi admin!");
-            header("Location: ?route=Auth/login");
-            exit;
-        }
+        // if ($user['deleted_at']  !== null) {
+        //     Session::set("flash_error", "Akun sudah dihapus, segera hubungi admin!");
+        //     header("Location: ?route=Auth/login");
+        //     exit;
+        // }
 
         # VALIDASI 1: Akun tidak ditemukan
         if (!$user) {
@@ -171,7 +171,7 @@ class AuthController
 
         # VALIDASI 3: Status ditolak admin redirect ke page khusus edit data register 
         if ($user['status_akun'] == 'Ditolak') {
-            if (!password_verify($password, $user['password'])){
+            if (!password_verify($password, $user['password'])) {
                 Session::set("flash_error", "username atau password salah");
                 header("Location: ?route=Auth/login");
                 exit;
@@ -183,7 +183,7 @@ class AuthController
             Session::regenerate();
 
             header("Location: ?route=Auth/fixRegistration");
-            exit;   
+            exit;
         }
 
         # VALIDASI 4: Status masih menunggu belum divalidasi admin
@@ -211,36 +211,37 @@ class AuthController
         Session::set("program_studi", $user['program_studi'] ?? '');
 
         Session::regenerate();
-        
+
         # Redirect user ke halaman home
         header("Location: ?route=User/home");
         exit;
     }
 
-    // handler untuk redirect user mahasiswa yang statusnya ditolak oleh admin
-    public function fixRegistration() {
+    // handler untuk redirect user mahasiswa yang statusnya ditolak oleh admin untuk upload ulang bukti aktivasi akun kubaca
+    public function fixRegistration()
+    {
         $user_id = Session::get('user_id');
 
-        if(!$user_id){
+        if (!$user_id) {
             Session::set('flash_error', 'username atau password salah.');
             header("Location: ?route=Auth/login");
             exit;
         }
 
-        $userModel = new user();
-        $user      = $userModel->findById($user_id);
+        // $userModel = new user();
+        // $user      = $userModel->findById($user_id);
 
-        if($user['status_akun'] !== 'Ditolak'){
-            header("Location: ?route=User/home");
-            exit;
-        }
+        // if ($user['status_akun'] !== 'Ditolak') {
+        //     header("Location: ?route=User/home");
+        //     exit;
+        // }
 
         $flash = $this->getFlashMessages();
 
         require_once __DIR__ . '/../views/auth/fix_registration.php';
     }
 
-    // handler buat upload ulang bukti aktivasi kubaca setelah ditolak admin untuk user mahasiswa
+    // handler buat submit upload ulang bukti aktivasi kubaca setelah ditolak admin untuk user mahasiswa
     public function submitFixRegistration()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -303,11 +304,10 @@ class AuthController
         exit;
     }
 
-    // handler buat redirect ke page register pilih role
+    // handler buat redirect ke page register choose role
     public function registerRole()
     {
         $flash = $this->getFlashMessages();
-
         require __DIR__ . '/../views/auth/register_pilihrole.php';
     }
 
@@ -336,12 +336,11 @@ class AuthController
             exit;
         }
 
-        if (empty($role)){
+        if (empty($role)) {
             Session::set('flash_error', 'Silakan pilih role terlebih dahulu.');
             header("Location: ?route=Auth/registerRole");
             exit;
         }
-
     }
 
     // handler page register mahasiswa
@@ -351,7 +350,7 @@ class AuthController
         $prodiList   = $this->prodiOptions();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+            
             $old = [
                 'nim_nip'        => trim($_POST['nim_nip'] ?? ''),
                 'jurusan'        => trim($_POST['jurusan'] ?? ''),
@@ -366,13 +365,13 @@ class AuthController
 
             // ================= VALIDASI =================
 
-            // CAPTCHA
-            if (($$_POST['captcha_input'] ?? '') !== ($_SESSION['captcha_code'] ?? '')) {
-                Session::set('flash_error', 'Captcha salah atau tidak sesuai.');
-                Session::setOld($old);
-                header("Location: ?route=Auth/registerMahasiswa");
-                exit;
-            }
+            // // CAPTCHA
+            // if (($$_POST['captcha_input'] ?? '') !== ($_SESSION['captcha_code'] ?? '')) {
+            //     Session::set('flash_error', 'Captcha salah atau tidak sesuai.');
+            //     Session::setOld($old);
+            //     header("Location: ?route=Auth/registerMahasiswa");
+            //     exit;
+            // }
 
             // REQUIRED FIELD
             foreach ($old as $key => $value) {
@@ -452,7 +451,7 @@ class AuthController
                 'nama'            => $old['nama'],
                 'no_hp'           => $old['no_hp'],
                 'email'           => $old['email'],
-                'password'        => $password,
+                'password'        => $password, 
                 'role'            => 'Mahasiswa',
                 'bukti_aktivasi'  => 'storage/uploads/bukti_aktivasi/' . $uploadName
             ]);
@@ -681,7 +680,7 @@ class AuthController
             // ================= SUCCESS =================
             $userModel->registerTendik([
                 'nim_nip'         => $old['nim_nip'],
-                'unit'            => $old['unit'],  
+                'unit'            => $old['unit'],
                 'nama'            => $old['nama'],
                 'no_hp'           => $old['no_hp'],
                 'email'           => $old['email'],
@@ -720,9 +719,9 @@ class AuthController
         ];
     }
 
-    private function unitOptions() : array
+    private function unitOptions(): array
     {
-        return[
+        return [
             'Perpustakaan',
             'Teknologi Informasi dan Komunikasi',
             'Rekayasa Teknologi dan Produk Unggulan',
@@ -735,50 +734,51 @@ class AuthController
     private function prodiOptions(): array
     {
         return [
-                'Konstruksi Sipil',
-                'Konstruksi Gedung',
-                'Teknik Perancangan Jalan dan Jembatan',
-                'Teknik Konstruksi Gedung',
-                'Teknik Mesin',
-                'Teknik Konversi Energi',
-                'Alat Berat',
-                'Manufaktur',
-                'Teknologi Rekayasa Manufaktur (d.h. Manufaktur)',
-                'Pembangkit Tenaga Listrik',
-                'Teknologi Rekayasa Pembangkit Energi (d.h. Pembangkit Tenaga Listrik)',
-                'Teknologi Rekayasa Konversi Energi',
-                'Teknologi Rekayasa Pemeliharaan Alat Berat',
-                'Elektronika Industri',
-                'Teknik Listrik',
-                'Telekomunikasi',
-                'Instrumentasi Kontrol Industri',
-                'Teknik Otomasi Listrik Industri',
-                'Broadband Multimedia',
-                'Akuntansi',
-                'Keuangan dan Perbankan',
-                'Akuntansi Keuangan',
-                'Keuangan dan Perbankan Syariah',
-                'Manajemen Keuangan',
-                'Manajemen Pemasaran (WNBK)',
-                'Administrasi Bisnis',
-                'Administrasi Bisnis Terapan',
-                'Usaha Jasa Konvensi, Perjalanan Insentif dan Pameran /MICE',
-                'Bahasa Inggris untuk Komunikasi Bisnis dan Profesional',
-                'Penerbitan',
-                'Teknik Grafika',
-                'Desain Grafis',
-                'Teknologi Industri Cetak Kemasan',
-                'Teknologi Rekayasa Cetak Dan Grafis 3 Dimensi',
-                'Teknik Informatika',
-                'Teknik Multimedia Digital',
-                'Teknik Multimedia dan Jaringan',
-                'Teknik Komputer dan Jaringan',
-                'Magister Rekayasa Teknologi Manufaktur',
-                'Magister Teknik Elektro'
+            'Konstruksi Sipil',
+            'Konstruksi Gedung',
+            'Teknik Perancangan Jalan dan Jembatan',
+            'Teknik Konstruksi Gedung',
+            'Teknik Mesin',
+            'Teknik Konversi Energi',
+            'Alat Berat',
+            'Manufaktur',
+            'Teknologi Rekayasa Manufaktur (d.h. Manufaktur)',
+            'Pembangkit Tenaga Listrik',
+            'Teknologi Rekayasa Pembangkit Energi (d.h. Pembangkit Tenaga Listrik)',
+            'Teknologi Rekayasa Konversi Energi',
+            'Teknologi Rekayasa Pemeliharaan Alat Berat',
+            'Elektronika Industri',
+            'Teknik Listrik',
+            'Telekomunikasi',
+            'Instrumentasi Kontrol Industri',
+            'Teknik Otomasi Listrik Industri',
+            'Broadband Multimedia',
+            'Akuntansi',
+            'Keuangan dan Perbankan',
+            'Akuntansi Keuangan',
+            'Keuangan dan Perbankan Syariah',
+            'Manajemen Keuangan',
+            'Manajemen Pemasaran (WNBK)',
+            'Administrasi Bisnis',
+            'Administrasi Bisnis Terapan',
+            'Usaha Jasa Konvensi, Perjalanan Insentif dan Pameran /MICE',
+            'Bahasa Inggris untuk Komunikasi Bisnis dan Profesional',
+            'Penerbitan',
+            'Teknik Grafika',
+            'Desain Grafis',
+            'Teknologi Industri Cetak Kemasan',
+            'Teknologi Rekayasa Cetak Dan Grafis 3 Dimensi',
+            'Teknik Informatika',
+            'Teknik Multimedia Digital',
+            'Teknik Multimedia dan Jaringan',
+            'Teknik Komputer dan Jaringan',
+            'Magister Rekayasa Teknologi Manufaktur',
+            'Magister Teknik Elektro'
         ];
     }
 
-    private function getFlashMessages(){
+    private function getFlashMessages()
+    {
         return [
             'success'   => Session::flash('flash_success'),
             'error'     => Session::flash('flash_error')
